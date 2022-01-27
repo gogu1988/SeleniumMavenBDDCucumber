@@ -1,9 +1,9 @@
-package connectors;
+package utils;
 
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class PropertiesFileConnector {
+public class PropertiesFileUtil {
 
     Properties webElement;
 

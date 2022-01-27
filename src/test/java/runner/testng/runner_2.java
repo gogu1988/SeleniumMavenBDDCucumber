@@ -15,7 +15,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Login_1 or @Logout_1"
+        tags = "@Login"
 )
 public class runner_2 extends AbstractTestNGCucumberTests {
 

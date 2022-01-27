@@ -4,6 +4,8 @@ import connectors.WebDriverConnector;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.Keys;
+import org.testng.Assert;
 
 public class LoginSteps {
 
@@ -28,26 +30,23 @@ public class LoginSteps {
         System.out.println("Click on login");
     }
 
-    @Then("User verify welcome message")
-    public void userVerifyWelcomeMessage() {
-        System.out.println("Verify welcome message");
+    @Then("user verify element text {string}")
+    public void userVerifyWelcomeMessage(String text) {
+        Assert.assertEquals(WebDriverCommonSteps.actualText, text);
     }
 
-    @Given("User open {string} browser")
+    @Given("user open {string} browser")
     public void userOpenBrowser(String browser) {
         wdc.openBrowser(browser);
     }
 
-    @And("User navigate to the google page")
+    @And("user navigate to the google page")
     public void userNavigateToTheGooglePage() {
         wdc.get("https://www.google.com");
     }
 
-    public void test(){
-        for (int i = 0; i < 10; i++) {
-            System.out.println("hi");
-            break;
-        }
+    @Given("testing background")
+    public void testingBackground() {
+        System.out.println("Hellow world");
     }
-
 }

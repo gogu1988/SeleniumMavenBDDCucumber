@@ -1,0 +1,1335 @@
+[
+  {
+    "line": 3,
+    "elements": [
+      {
+        "start_timestamp": "2022-01-27T03:21:54.420Z",
+        "before": [
+          {
+            "output": [
+              "This is the logger"
+            ],
+            "result": {
+              "duration": 4441000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.setup(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 4,
+        "name": "DB test",
+        "description": "",
+        "id": "db-feature-test;db-test",
+        "after": [
+          {
+            "result": {
+              "error_message": "java.lang.NullPointerException: Cannot invoke \"org.openqa.selenium.WebDriver.quit()\" because \"this.driver\" is null\r\n\tat connectors.WebDriverConnector.quit(WebDriverConnector.java:151)\r\n\tat stepDefinitions.Hooks.tearDown(Hooks.java:30)\r\n",
+              "duration": 988400,
+              "status": "failed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "testing the background",
+            "match": {
+              "location": "stepDefinitions.DataBaseCommonSteps.testingTheBackground()"
+            },
+            "keyword": "Given "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Login"
+          }
+        ]
+      }
+    ],
+    "name": "DB feature test",
+    "description": "",
+    "id": "db-feature-test",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/DBCommonSteps.feature",
+    "tags": [
+      {
+        "name": "@Login",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "line": 3,
+    "elements": [
+      {
+        "line": 6,
+        "name": "Test BackGround",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "testing background",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.testingBackground()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-01-27T03:21:54.464Z",
+        "before": [
+          {
+            "output": [
+              "This is the logger"
+            ],
+            "result": {
+              "duration": 499600,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.setup(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 25,
+        "name": "Login Scenario 1",
+        "description": "",
+        "id": "run-1-testing-login-feature;login-scenario-1;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 621982400,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 2590286900,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "user open \"Chrome\" browser",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Chrome\"",
+                  "offset": 10
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userOpenBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 683050300,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user navigate to the google page",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.userNavigateToTheGooglePage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 28991300,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user get Text of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1004900,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "user verify element text \"Gmail\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Gmail\"",
+                  "offset": 25
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userVerifyWelcomeMessage(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 10530700,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "user get TagName of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 20
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 35
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTagNameOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 21635100,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user get \"class\" Attribute of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"class\"",
+                  "offset": 9
+                },
+                {
+                  "val": "\"gmail\"",
+                  "offset": 30
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 45
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetAttributeOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 14007800,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "user get Text of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 16113100,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "user get Location of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 36
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetLocationOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 15640800,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "user get Size of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetSizeOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 13612900,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "user get Rect of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetRectOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 14310400,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "user get CssValue of \"background-color\" of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"background-color\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"gmail\"",
+                  "offset": 43
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 58
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetCssValueOfOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 13858500,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "user click using Actions on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userClickUsingActionsOnThe(java.lang.String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Login"
+          }
+        ]
+      },
+      {
+        "line": 6,
+        "name": "Test BackGround",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "testing background",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.testingBackground()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-01-27T03:21:58.534Z",
+        "before": [
+          {
+            "output": [
+              "This is the logger"
+            ],
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.setup(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 26,
+        "name": "Login Scenario 1",
+        "description": "",
+        "id": "run-1-testing-login-feature;login-scenario-1;;3",
+        "after": [
+          {
+            "result": {
+              "duration": 654425600,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 1490562100,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "user open \"Chrome\" browser",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Chrome\"",
+                  "offset": 10
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userOpenBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 983073100,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user navigate to the google page",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.userNavigateToTheGooglePage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 24786800,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user get Text of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"images\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "user verify element text \"Images\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Images\"",
+                  "offset": 25
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userVerifyWelcomeMessage(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 10000600,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "user get TagName of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"images\"",
+                  "offset": 20
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 36
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTagNameOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 15236200,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user get \"class\" Attribute of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"class\"",
+                  "offset": 9
+                },
+                {
+                  "val": "\"images\"",
+                  "offset": 30
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 46
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetAttributeOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 13624600,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "user get Text of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"images\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 13383400,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "user get Location of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"images\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 37
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetLocationOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 10549000,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "user get Size of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"images\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetSizeOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 10379900,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "user get Rect of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"images\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetRectOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 12111400,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "user get CssValue of \"background-color\" of \"images\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"background-color\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"images\"",
+                  "offset": 43
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 59
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetCssValueOfOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 12503800,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "user click using Actions on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userClickUsingActionsOnThe(java.lang.String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Login"
+          }
+        ]
+      },
+      {
+        "line": 6,
+        "name": "Test BackGround",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "testing background",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.testingBackground()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-01-27T03:22:01.799Z",
+        "before": [
+          {
+            "output": [
+              "This is the logger"
+            ],
+            "result": {
+              "duration": 928400,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.setup(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 27,
+        "name": "Login Scenario 1",
+        "description": "",
+        "id": "run-1-testing-login-feature;login-scenario-1;;4",
+        "after": [
+          {
+            "result": {
+              "duration": 646643400,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 1420013400,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "user open \"Chrome\" browser",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Chrome\"",
+                  "offset": 10
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userOpenBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 656767300,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user navigate to the google page",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.userNavigateToTheGooglePage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 22558300,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user get Text of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"telugu\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "user verify element text \"తెలుగు\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"తెలుగు\"",
+                  "offset": 25
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userVerifyWelcomeMessage(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 9579100,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "user get TagName of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"telugu\"",
+                  "offset": 20
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 36
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTagNameOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 14199200,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user get \"class\" Attribute of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"class\"",
+                  "offset": 9
+                },
+                {
+                  "val": "\"telugu\"",
+                  "offset": 30
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 46
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetAttributeOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 12932700,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "user get Text of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"telugu\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 12967800,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "user get Location of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"telugu\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 37
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetLocationOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 11802200,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "user get Size of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"telugu\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetSizeOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 9652400,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "user get Rect of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"telugu\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 33
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetRectOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 11803200,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "user get CssValue of \"background-color\" of \"telugu\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"background-color\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"telugu\"",
+                  "offset": 43
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 59
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetCssValueOfOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 11254800,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "user click using Actions on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userClickUsingActionsOnThe(java.lang.String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Login"
+          }
+        ]
+      },
+      {
+        "line": 6,
+        "name": "Test BackGround",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "testing background",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.testingBackground()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-01-27T03:22:04.649Z",
+        "before": [
+          {
+            "output": [
+              "This is the logger"
+            ],
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.setup(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 45,
+        "name": "Login Scenario 2",
+        "description": "",
+        "id": "run-1-testing-login-feature;login-scenario-2;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 631301600,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 1418296000,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "user open \"Chrome\" browser",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Chrome\"",
+                  "offset": 10
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userOpenBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 554237400,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "user navigate to the google page",
+            "match": {
+              "location": "stepDefinitions.LoginSteps.userNavigateToTheGooglePage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 22639000,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "user get Text of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "user verify element text \"Gmail\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Gmail\"",
+                  "offset": 25
+                }
+              ],
+              "location": "stepDefinitions.LoginSteps.userVerifyWelcomeMessage(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 10309300,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "user get TagName of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 20
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 35
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTagNameOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 14822800,
+              "status": "passed"
+            },
+            "line": 35,
+            "name": "user get \"class\" Attribute of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"class\"",
+                  "offset": 9
+                },
+                {
+                  "val": "\"gmail\"",
+                  "offset": 30
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 45
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetAttributeOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 12936600,
+              "status": "passed"
+            },
+            "line": 36,
+            "name": "user get Text of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetTextOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 11503900,
+              "status": "passed"
+            },
+            "line": 37,
+            "name": "user get Location of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 36
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetLocationOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 10597700,
+              "status": "passed"
+            },
+            "line": 38,
+            "name": "user get Size of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetSizeOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 7891500,
+              "status": "passed"
+            },
+            "line": 39,
+            "name": "user get Rect of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"gmail\"",
+                  "offset": 17
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetRectOfOnThe(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 10844800,
+              "status": "passed"
+            },
+            "line": 40,
+            "name": "user get CssValue of \"background-color\" of \"gmail\" on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"background-color\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"gmail\"",
+                  "offset": 43
+                },
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 58
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userGetCssValueOfOfOnThe(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 11208400,
+              "status": "passed"
+            },
+            "line": 41,
+            "name": "user click using Actions on the \"loginPage\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"loginPage\"",
+                  "offset": 32
+                }
+              ],
+              "location": "stepDefinitions.WebDriverCommonSteps.userClickUsingActionsOnThe(java.lang.String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Login"
+          }
+        ]
+      }
+    ],
+    "name": "Run 1 Testing Login Feature",
+    "description": "",
+    "id": "run-1-testing-login-feature",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/Login.feature",
+    "tags": [
+      {
+        "name": "@Login",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

@@ -19,7 +19,7 @@ import org.testng.annotations.*;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Login or @Logout or @Login_1 or @Logout_1"
+        tags = "@Login"
 )
 public class runner_1 extends AbstractTestNGCucumberTests {
 
