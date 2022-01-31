@@ -43,6 +43,11 @@ public class WebDriverCommonSteps {
         wdc.sendKeys(page, elementName, text);
     }
 
+    @And("user sendKeys below para in {string} on the {string}")
+    public void userSendKeysBelowParaInOnThe(String elementName, String page, String para) {
+        wdc.sendKeys(page, elementName, para);
+    }
+
     @And("user clear {string} on the {string}")
     public void userClearOnThe(String elementName, String page) {
         wdc.clear(page, elementName);
@@ -158,17 +163,17 @@ public class WebDriverCommonSteps {
         wdc.actionsDragAndDropBy(page, elementName, x, y);
     }
 
-    @And("user move the mouse mouse to the position  x:{int} and y:{int} on the {string}")
+    @And("user move the mouse to the position  x:{int} and y:{int} on the {string}")
     public void userMoveTheMouseToThePositionXAndYOnThe(int x, int y, String page) {
         wdc.actionsMoveByOffset(x, y);
     }
 
-    @And("user move the mouse mouse to the {string} on the {string}")
+    @And("user move the mouse to the {string} on the {string}")
     public void userMoveTheMouseMouseToTheWithThePositionXAndYOnThe(String elementName, String page) {
         wdc.actionsMoveToElement(page, elementName);
     }
 
-    @And("user move the mouse mouse to the {string} with the position x:{int} and y:{int} on the {string}")
+    @And("user move the mouse to the {string} with the position x:{int} and y:{int} on the {string}")
     public void userMoveTheMouseMouseToTheWithThePositionXAndYOnThe(String elementName, int x, int y, String page) {
         wdc.actionsMoveToElement(page, elementName, x, y);
     }
@@ -177,4 +182,16 @@ public class WebDriverCommonSteps {
     public void userSendKeysInUsingActionsOnThe(String text, String elementName, String page) {
         wdc.actionsSendKeys(page, elementName, text);
     }
+
+    @Then("user get {string} url")
+    public void userGetUrl(String url) {
+        wdc.get(url);
+    }
+
+    @And("user wait for {int} sec")
+    public void userWaitForSec(int time) throws InterruptedException {
+        Thread.sleep(time*1000);
+    }
+
+
 }

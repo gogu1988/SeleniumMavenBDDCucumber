@@ -5,9 +5,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertiesFileUtil;
 
+import java.net.URL;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class WebDriverConnector {
 
@@ -136,6 +142,9 @@ public class WebDriverConnector {
                 break;
 
         }
+    }
+
+    public void windowMaximize(){
         driver.manage().window().maximize();
     }
 
@@ -145,51 +154,15 @@ public class WebDriverConnector {
 
     public void get(String url) {
         driver.get(url);
+        driver.manage().window().maximize();
     }
 
-    public void quit() {
-        driver.quit();
+    public String getCurrentUrl(){
+        return driver.getCurrentUrl();
     }
 
-    public void close() {
-        driver.close();
-    }
-
-    // WebElement Start
-    public void click(String pageName, String elementName) {
-        driverWebElement(pageName, elementName).click();
-    }
-
-    public void submit(String pageName, String elementName) {
-        driverWebElement(pageName, elementName).submit();
-    }
-
-    public void sendKeys(String pageName, String elementName, String text) {
-        driverWebElement(pageName, elementName).sendKeys(text);
-    }
-
-    public void clear(String pageName, String elementName) {
-        driverWebElement(pageName, elementName).clear();
-    }
-
-    public String getTagName(String pageName, String elementName) {
-        return driverWebElement(pageName, elementName).getTagName();
-    }
-
-    public String getAttribute(String pageName, String elementName, String attributeName) {
-        return driverWebElement(pageName, elementName).getAttribute(attributeName);
-    }
-
-    public boolean isSelected(String pageName, String elementName) {
-       return driverWebElement(pageName, elementName).isSelected();
-    }
-
-    public boolean isEnabled(String pageName, String elementName) {
-        return driverWebElement(pageName, elementName).isEnabled();
-    }
-
-    public String getText(String pageName, String elementName) {
-        return driverWebElement(pageName, elementName).getText();
+    public String getTitle(){
+        return driver.getTitle();
     }
 
     public List<WebElement> findElements(String locatorType, String finalElement) {
@@ -274,6 +247,182 @@ public class WebDriverConnector {
         }
 
         return findElement;
+    }
+
+    public String getPageSource(){
+        return driver.getPageSource();
+    }
+
+    public void close() {
+        driver.close();
+    }
+
+    public void quit() {
+        driver.quit();
+    }
+
+    public Set<String> getWindowHandles(){
+        return driver.getWindowHandles();
+    }
+
+    public String getWindowHandle(){
+        return driver.getWindowHandle();
+    }
+
+    public void switchToFrame(int frameId){
+        driver.switchTo().frame(frameId);
+    }
+    public void switchToFrame(String frameName){
+        driver.switchTo().frame(frameName);
+    }
+
+    public void switchToFrame(String elementName, String pageName){
+        driver.switchTo().frame(driverWebElement(pageName, elementName));
+    }
+
+    public void switchToParentFrame(String elementName, String pageName){
+        driver.switchTo().parentFrame();
+    }
+
+    public void switchToWindow(String windowName){
+        driver.switchTo().window(windowName);
+    }
+
+    public void switchToDefaultContent(){
+        driver.switchTo().defaultContent();
+    }
+
+    public void switchToActiveElement(){
+        driver.switchTo().activeElement();
+    }
+
+    public void switchToAlert(){
+        driver.switchTo().alert();
+    }
+
+    public void navigateBack(){
+        driver.navigate().back();
+    }
+
+    public void navigateForward(){
+        driver.navigate().forward();
+    }
+
+    public void navigateTo(String url){
+        driver.navigate().to(url);
+    }
+
+    public void navigateTo(URL url){
+        driver.navigate().to(url);
+    }
+
+    public void refresh(){
+        driver.navigate().refresh();
+    }
+
+    public void addCookie(Cookie cookie){
+        driver.manage().addCookie(cookie);
+    }
+
+    public void deleteCookieNamed(String cookieName){
+        driver.manage().deleteCookieNamed(cookieName);
+    }
+
+    public void deleteCookie(Cookie cookie){
+        driver.manage().deleteCookie(cookie);
+    }
+
+    public void deleteAllCookies(){
+        driver.manage().deleteAllCookies();
+    }
+
+    public Set<Cookie> getCookies(){
+       return driver.manage().getCookies();
+    }
+
+    public Cookie getCookieNamed(String cookieName){
+        return driver.manage().getCookieNamed(cookieName);
+    }
+
+    public void implicitlyWait() {
+        driver.manage().timeouts().implicitlyWait(Integer.parseInt(pfc.frameworkConfig().getProperty("implicitlyWait")), TimeUnit.SECONDS);
+    }
+
+    public void setScriptTimeout(){
+        driver.manage().timeouts().setScriptTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("setScriptTimeout")), TimeUnit.SECONDS);
+    }
+
+    public void pageLoadTimeout(){
+        driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
+    }
+
+    public void explicitWait(int sec){
+        WebDriverWait wait = new WebDriverWait(driver,sec);
+    }
+
+    public Wait fluentWait(int timeout, int pollingTime){
+        Wait wait = new FluentWait(driver)
+                .withTimeout(timeout, TimeUnit.SECONDS)
+                .pollingEvery(pollingTime, TimeUnit.SECONDS)
+                .ignoring(Exception.class);
+        return wait;
+    }
+
+    public List<String> getAvailableEngines(){
+        return driver.manage().ime().getAvailableEngines();
+    }
+
+    public String getActiveEngine(){
+        return driver.manage().ime().getActiveEngine();
+    }
+
+    public boolean engineIsActivated(){
+        return driver.manage().ime().isActivated();
+    }
+
+    public void engineDeactivate(){
+        driver.manage().ime().deactivate();
+    }
+
+    public void activateEngine(String engineName){
+        driver.manage().ime().activateEngine(engineName);
+    }
+
+    // WebElement Start
+    public void click(String pageName, String elementName) {
+        driverWebElement(pageName, elementName).click();
+    }
+
+    public void submit(String pageName, String elementName) {
+        driverWebElement(pageName, elementName).submit();
+    }
+
+    public void sendKeys(String pageName, String elementName, String text) {
+        driverWebElement(pageName, elementName).sendKeys(text);
+    }
+
+    public void clear(String pageName, String elementName) {
+        driverWebElement(pageName, elementName).clear();
+    }
+
+    public String getTagName(String pageName, String elementName) {
+        return driverWebElement(pageName, elementName).getTagName();
+    }
+
+    public String getAttribute(String pageName, String elementName, String attributeName) {
+        return driverWebElement(pageName, elementName).getAttribute(attributeName);
+    }
+
+    public boolean isSelected(String pageName, String elementName) {
+       return driverWebElement(pageName, elementName).isSelected();
+    }
+
+    public boolean isEnabled(String pageName, String elementName) {
+        return driverWebElement(pageName, elementName).isEnabled();
+    }
+
+    public String getText(String pageName, String elementName) {
+        return driverWebElement(pageName, elementName).getText();
     }
 
     public boolean isDisplayed(String pageName, String elementName) {

@@ -5,13 +5,14 @@ import connectors.WebDriverConnector;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.Then;
 
 public class Hooks {
 
     WebDriverConnector wdc;
     DatabaseConnector dbc;
 
-    public Scenario currentScenario;
+    public static Scenario currentScenario;
 
     public Hooks(WebDriverConnector wdc, DatabaseConnector dbc) {
         this.wdc = wdc;
@@ -24,11 +25,27 @@ public class Hooks {
         currentScenario.log("This is the logger");
     }
 
-    @After
-    public void tearDown() {
-        wdc.quit();
+    @Then("user take screen shot")
+    public void userTakeScreenShot(String screenShotName) {
+        wdc.takeScreenshot();
+        currentScenario.attach(wdc.takeScreenshot(), ".png", screenShotName);
     }
 
+    @Then("user write the log as {string}")
+    public void userWriteTheLogAs(String log) {
+        currentScenario.log(log);
+    }
+
+
+    @After
+    public void tearDown() {
+        if (currentScenario.isFailed()) {
+            wdc.takeScreenshot();
+            currentScenario.attach(wdc.takeScreenshot(), ".png", "FailedScreenshot");
+        }
+        wdc.quit();
+
+    }
 
 
 }

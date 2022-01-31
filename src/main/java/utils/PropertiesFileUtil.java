@@ -6,17 +6,30 @@ import java.util.Properties;
 public class PropertiesFileUtil {
 
     Properties webElement;
+    Properties frameworkConfig;
 
-    public Properties webElementReader(String pageName){
+    public Properties webElementReader(String fileName){
         try {
             webElement= new Properties();
-            FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\pageObjects\\"+pageName+".properties");
+            FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\pageObjects\\"+fileName+".properties");
             webElement.load(fs);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return webElement;
+    }
+
+    public Properties frameworkConfig(){
+        try {
+            frameworkConfig= new Properties();
+            FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\config\\frameworkConfig.properties");
+            frameworkConfig.load(fs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return frameworkConfig;
     }
 
 

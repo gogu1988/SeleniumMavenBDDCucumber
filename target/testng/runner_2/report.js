@@ -1,65 +1,66 @@
 $(document).ready(function() {
 CucumberHTML.timelineItems.pushArray([
   {
-    "id": "dbe6bcd3-6e8f-4a0e-9d74-ad63faf15cd1",
-    "feature": "DB feature test",
-    "scenario": "DB test",
-    "start": 1643253714420,
-    "group": 1,
-    "content": "",
-    "tags": "@login,",
-    "end": 1643253714439,
-    "className": "failed"
-  },
-  {
-    "id": "6066ab87-efe3-4716-883d-14509aeeb771",
+    "id": "747f9355-bbf8-4d5f-b5eb-1c87375fb720",
     "feature": "Run 1 Testing Login Feature",
     "scenario": "Login Scenario 1",
-    "start": 1643253714464,
-    "group": 1,
+    "start": 1643457623662,
+    "group": 18,
     "content": "",
     "tags": "@login,",
-    "end": 1643253718513,
+    "end": 1643457630524,
     "className": "passed"
   },
   {
-    "id": "82d44b59-b669-4c26-a958-fa531c8293f2",
+    "id": "432746fe-e1c1-4348-a502-fae460010c62",
     "feature": "Run 1 Testing Login Feature",
     "scenario": "Login Scenario 2",
-    "start": 1643253724649,
-    "group": 1,
+    "start": 1643457623662,
+    "group": 19,
     "content": "",
     "tags": "@login,",
-    "end": 1643253727368,
+    "end": 1643457631060,
     "className": "passed"
   },
   {
-    "id": "c5fead20-625a-4b80-b323-330817d62dc9",
+    "id": "964c54b1-810d-4f83-9dac-827fe1854db2",
     "feature": "Run 1 Testing Login Feature",
     "scenario": "Login Scenario 1",
-    "start": 1643253718534,
-    "group": 1,
+    "start": 1643457623664,
+    "group": 17,
     "content": "",
     "tags": "@login,",
-    "end": 1643253721788,
+    "end": 1643457630479,
     "className": "passed"
   },
   {
-    "id": "a072789a-f56d-4c0c-a457-bdfacb22d789",
+    "id": "2b038cec-5d36-4f15-b190-4da56d16803b",
     "feature": "Run 1 Testing Login Feature",
     "scenario": "Login Scenario 1",
-    "start": 1643253721799,
-    "group": 1,
+    "start": 1643457623664,
+    "group": 16,
     "content": "",
     "tags": "@login,",
-    "end": 1643253724641,
+    "end": 1643457629904,
     "className": "passed"
   }
 ]);
 CucumberHTML.timelineGroups.pushArray([
   {
-    "id": 1,
-    "content": "Thread[main,5,main]"
+    "id": 16,
+    "content": "Thread[TestNG-PoolService-0,5,main]"
+  },
+  {
+    "id": 17,
+    "content": "Thread[TestNG-PoolService-1,5,main]"
+  },
+  {
+    "id": 18,
+    "content": "Thread[TestNG-PoolService-2,5,main]"
+  },
+  {
+    "id": 19,
+    "content": "Thread[TestNG-PoolService-3,5,main]"
   }
 ]);
 });

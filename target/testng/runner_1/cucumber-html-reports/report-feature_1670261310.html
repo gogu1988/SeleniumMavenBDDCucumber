@@ -74,7 +74,7 @@ $(document).ready(function() {
   <tbody>
     <tr class="info">
       <td>No Name (add projectName to cucumber-reporting.properties)</td>
-      <td>05 Mar 2021, 00:12</td>
+      <td>31 Jan 2022, 10:49</td>
     </tr>
   </tbody>
 </table>
@@ -271,34 +271,10 @@ $(document).ready(function() {
   <div class="inner-level">
     <div class="message indention">
       <div data-toggle="collapse" class=" collapsable-control" data-target="#msg-3">
-          <a>There</a>
+          <a>io.cucumber.core.runner.DuplicateStepDefinitionException:</a>
       </div>
       <div id="msg-3" class="collapse collapsable-details  in ">
-        <pre>There were 4 exceptions:
-  io.cucumber.java.InvalidMethodSignatureException(A method annotated with Before, After, BeforeStep or AfterStep must have one of these signatures:
- * public void before_or_after(io.cucumber.java.Scenario scenario)
- * public void before_or_after()
-at stepDefinitions.HooksUtil.setup(io.cucumber.java.Scenario,util.ReportsLogUtil)
-
-)
-  io.cucumber.java.InvalidMethodSignatureException(A method annotated with Before, After, BeforeStep or AfterStep must have one of these signatures:
- * public void before_or_after(io.cucumber.java.Scenario scenario)
- * public void before_or_after()
-at stepDefinitions.HooksUtil.setup(io.cucumber.java.Scenario,util.ReportsLogUtil)
-
-)
-  io.cucumber.java.InvalidMethodSignatureException(A method annotated with Before, After, BeforeStep or AfterStep must have one of these signatures:
- * public void before_or_after(io.cucumber.java.Scenario scenario)
- * public void before_or_after()
-at stepDefinitions.HooksUtil.setup(io.cucumber.java.Scenario,util.ReportsLogUtil)
-
-)
-  io.cucumber.java.InvalidMethodSignatureException(A method annotated with Before, After, BeforeStep or AfterStep must have one of these signatures:
- * public void before_or_after(io.cucumber.java.Scenario scenario)
- * public void before_or_after()
-at stepDefinitions.HooksUtil.setup(io.cucumber.java.Scenario,util.ReportsLogUtil)
-
-)</pre>
+        <pre>io.cucumber.core.runner.DuplicateStepDefinitionException: Duplicate step definitions in stepDefinitions.WebDriverCommonSteps.userSendKeysInOnThe(java.lang.String,java.lang.String,java.lang.String,java.lang.String) and stepDefinitions.WebDriverCommonSteps.userSendKeysInOnThe(java.lang.String,java.lang.String,java.lang.String)</pre>
       </div>
     </div>
   </div>

@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="5" time="13.12">
-    <testcase classname="DB feature test" name="DB test" time="0.019">
-        <failure message="Cannot invoke &quot;org.openqa.selenium.WebDriver.quit()&quot; because &quot;this.driver&quot; is null" type="java.lang.NullPointerException"><![CDATA[Given testing the background................................................passed
-
-StackTrace:
-java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.quit()" because "this.driver" is null
-	at connectors.WebDriverConnector.quit(WebDriverConnector.java:151)
-	at stepDefinitions.Hooks.tearDown(Hooks.java:30)
-]]></failure>
-    </testcase>
-    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 1" time="4.049">
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="4" time="7.612">
+    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 1" time="6.24">
         <system-out><![CDATA[Given testing background....................................................passed
 Given user open "Chrome" browser............................................passed
 And user navigate to the google page........................................passed
@@ -25,7 +16,7 @@ When user get CssValue of "background-color" of "gmail" on the "loginPage"..pass
 And user click using Actions on the "loginPage".............................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 1 2" time="3.253">
+    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 1 2" time="6.814">
         <system-out><![CDATA[Given testing background....................................................passed
 Given user open "Chrome" browser............................................passed
 And user navigate to the google page........................................passed
@@ -41,7 +32,7 @@ When user get CssValue of "background-color" of "images" on the "loginPage".pass
 And user click using Actions on the "loginPage".............................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 1 3" time="2.842">
+    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 1 3" time="6.862">
         <system-out><![CDATA[Given testing background....................................................passed
 Given user open "Chrome" browser............................................passed
 And user navigate to the google page........................................passed
@@ -57,7 +48,7 @@ When user get CssValue of "background-color" of "telugu" on the "loginPage".pass
 And user click using Actions on the "loginPage".............................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 2" time="2.719">
+    <testcase classname="Run 1 Testing Login Feature" name="Login Scenario 2" time="7.398">
         <system-out><![CDATA[Given testing background....................................................passed
 Given user open "Chrome" browser............................................passed
 And user navigate to the google page........................................passed

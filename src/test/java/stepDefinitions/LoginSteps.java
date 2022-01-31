@@ -38,6 +38,10 @@ public class LoginSteps {
     @Given("user open {string} browser")
     public void userOpenBrowser(String browser) {
         wdc.openBrowser(browser);
+        wdc.implicitlyWait();
+        wdc.windowMaximize();
+        wdc.pageLoadTimeout();
+        wdc.setScriptTimeout();
     }
 
     @And("user navigate to the google page")
@@ -49,4 +53,5 @@ public class LoginSteps {
     public void testingBackground() {
         System.out.println("Hellow world");
     }
+
 }

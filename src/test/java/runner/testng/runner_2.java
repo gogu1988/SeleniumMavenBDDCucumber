@@ -2,6 +2,7 @@ package runner.testng;
 
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
+import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         dryRun = false,
@@ -19,4 +20,12 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 )
 public class runner_2 extends AbstractTestNGCucumberTests {
 
+    @Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
+
 }
+
+
