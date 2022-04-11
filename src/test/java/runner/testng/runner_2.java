@@ -15,7 +15,7 @@ import org.testng.annotations.DataProvider;
                 "timeline:target/testng/runner_2"
         },
         glue = {"stepDefinitions"},
-        features = {"src/test/resources/features"},
+        features = {"@target/testng/runner_1/rerun.txt"},
         tags = "@Login"
 )
 public class runner_2 extends AbstractTestNGCucumberTests {

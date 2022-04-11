@@ -50,11 +50,11 @@ $(document).ready(function() {
     var chartData = {
         datasets: [{
             data: [
-                2,
-                2,
-                16,
+                52,
                 0,
-                0
+                0,
+                0,
+                1
             ],
             backgroundColor: [
                 "#00B000",
@@ -93,7 +93,7 @@ $(document).ready(function() {
                         var allData = data.datasets[tooltipItem.datasetIndex].data;
                         var tooltipLabel = data.labels[tooltipItem.index];
                         var tooltipData = allData[tooltipItem.index];
-                        var tooltipPercentage = Math.round(10000 * tooltipData / 20) / 100;
+                        var tooltipPercentage = Math.round(10000 * tooltipData / 53) / 100;
                         return tooltipLabel + ": " + tooltipData + " (" + tooltipPercentage + "%)";
                     }
                 }
@@ -106,8 +106,8 @@ $(document).ready(function() {
     var chartData = {
         datasets: [{
             data: [
-                0,
-                2
+                3,
+                1
             ],
             backgroundColor: [
                 "#00B000",
@@ -140,7 +140,7 @@ $(document).ready(function() {
                         var allData = data.datasets[tooltipItem.datasetIndex].data;
                         var tooltipLabel = data.labels[tooltipItem.index];
                         var tooltipData = allData[tooltipItem.index];
-                        var tooltipPercentage = Math.round(10000 * tooltipData / 2) / 100;
+                        var tooltipPercentage = Math.round(10000 * tooltipData / 4) / 100;
                         return tooltipLabel + ": " + tooltipData + " (" + tooltipPercentage + "%)";
                     }
                 }
@@ -228,7 +228,7 @@ $(document).ready(function() {
   <tbody>
     <tr class="info">
       <td>No Name (add projectName to cucumber-reporting.properties)</td>
-      <td>31 Jan 2022, 12:46</td>
+      <td>06 Apr 2022, 12:17</td>
     </tr>
   </tbody>
 </table>
@@ -323,20 +323,20 @@ $(document).ready(function() {
 
   <tbody>
       <tr>
-        <td class="tagname"><a href="report-feature_1008753007.html">Wallet Company Demo</a></td>
+        <td class="tagname"><a href="report-feature_1764534172.html">Run 1 Testing Login Feature</a></td>
 
-        <td      class="passed"    >2</td>
-        <td      class="failed"    >2</td>
-        <td     class="skipped"   >16</td>
+        <td      class="passed"    >52</td>
         <td >0</td>
         <td >0</td>
-        <td class="total">20</td>
-
         <td >0</td>
-        <td  class="failed"    >2</td>
-        <td class="total">2</td>
+        <td   class="undefined" >1</td>
+        <td class="total">53</td>
 
-        <td class="duration" data-value="4141096600">4.141</td>
+        <td  class="passed"    >3</td>
+        <td  class="failed"    >1</td>
+        <td class="total">4</td>
+
+        <td class="duration" data-value="23702404200">23.702</td>
         <td class="failed">Failed</td>
       </tr>
   </tbody>
@@ -344,30 +344,30 @@ $(document).ready(function() {
   <tfoot class="total">
     <tr>
       <td></td>
-      <td>2</td>
-      <td>2</td>
-      <td>16</td>
+      <td>52</td>
       <td>0</td>
       <td>0</td>
-      <td>20</td>
+      <td>0</td>
+      <td>1</td>
+      <td>53</td>
 
-      <td>0</td>
-      <td>2</td>
-      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>4</td>
 
-      <td class="duration">4.141</td>
+      <td class="duration">23.702</td>
       <td>1</td>
     </tr>
     <tr>
       <td></td>
-      <td>10.00%</td>
-      <td>10.00%</td>
-      <td>80.00%</td>
+      <td>98.11%</td>
       <td>0.00%</td>
       <td>0.00%</td>
+      <td>0.00%</td>
+      <td>1.89%</td>
       <td></td>
-      <td>0.00%</td>
-      <td>100.00%</td>
+      <td>75.00%</td>
+      <td>25.00%</td>
       <td></td>
       <td></td>
       <td>0.00%</td>

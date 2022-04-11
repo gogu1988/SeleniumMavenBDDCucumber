@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertiesFileUtil;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -356,16 +357,15 @@ public class WebDriverConnector {
         driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
     }
 
-    public void explicitWait(int sec){
-        WebDriverWait wait = new WebDriverWait(driver,sec);
+    public WebDriverWait explicitWait(int sec){
+        return new WebDriverWait(driver,sec);
     }
 
     public Wait fluentWait(int timeout, int pollingTime){
-        Wait wait = new FluentWait(driver)
+        return new FluentWait(driver)
                 .withTimeout(timeout, TimeUnit.SECONDS)
                 .pollingEvery(pollingTime, TimeUnit.SECONDS)
                 .ignoring(Exception.class);
-        return wait;
     }
 
     public List<String> getAvailableEngines(){

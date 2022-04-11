@@ -14,7 +14,7 @@ public class DatabaseConnector {
         st = con.createStatement();
     }
 
-    public List<HashMap<Object, Object>> exec(String sqlQuery) throws SQLException {
+    public List<HashMap<Object, Object>> executeQuery(String sqlQuery) throws SQLException {
         List<HashMap<Object, Object>> dbResult = new ArrayList<HashMap<Object, Object>>();
         ResultSet rs = st.executeQuery(sqlQuery);
         while (rs.next()) {

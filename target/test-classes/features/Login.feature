@@ -39,6 +39,7 @@ Feature: Run 1 Testing Login Feature
     When user get Rect of "<Element>" on the "loginPage"
     When user get CssValue of "background-color" of "<Element>" on the "loginPage"
     And user click using Actions on the "loginPage"
+    And user
 
     Examples:
       | Browser | Element | ExpectedText |
