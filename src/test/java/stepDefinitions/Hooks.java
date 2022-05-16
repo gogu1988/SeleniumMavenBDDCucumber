@@ -43,7 +43,6 @@ public class Hooks {
             wdc.takeScreenshot();
             currentScenario.attach(wdc.takeScreenshot(), ".png", "FailedScreenshot");
         }
-        wdc.quit();
 
     }
 

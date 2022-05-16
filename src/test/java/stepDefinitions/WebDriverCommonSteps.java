@@ -68,17 +68,17 @@ public class WebDriverCommonSteps {
         isDisplayed = wdc.isDisplayed(page, elementName);
     }
 
-    @When("user get Text of {string} on the {string}")
+    @When("user get Text of {string} on {string}")
     public void userGetTextOfOnThe(String elementName, String page) {
         actualText = wdc.getText(page, elementName);
     }
 
-    @When("user get TagName of {string} on the {string}")
+    @When("user get TagName of {string} on {string}")
     public void userGetTagNameOfOnThe(String elementName, String page) {
         actualTagName = wdc.getTagName(page, elementName);
     }
 
-    @When("user get {string} Attribute of {string} on the {string}")
+    @When("user get {string} Attribute of {string} on {string}")
     public void userGetAttributeOfOnThe(String attribute, String elementName, String page) {
         actualAttribute = wdc.getAttribute(page, elementName, attribute);
     }
@@ -93,27 +93,27 @@ public class WebDriverCommonSteps {
         actualElement = wdc.findElement(locatorType, identifier);
     }
 
-    @When("user get Location of {string} on the {string}")
+    @When("user get Location of {string} on {string}")
     public void userGetLocationOfOnThe(String elementName, String page) {
         actualLocation = wdc.getLocation(page, elementName);
     }
 
-    @When("user get Size of {string} on the {string}")
+    @When("user get Size of {string} on {string}")
     public void userGetSizeOfOnThe(String elementName, String page) {
         actualSize = wdc.getSize(page, elementName);
     }
 
-    @When("user get Rect of {string} on the {string}")
+    @When("user get Rect of {string} on {string}")
     public void userGetRectOfOnThe(String elementName, String page) {
         actualRect = wdc.getRect(page, elementName);
     }
 
-    @When("user get CssValue of {string} of {string} on the {string}")
+    @When("user get CssValue of {string} of {string} on {string}")
     public void userGetCssValueOfOfOnThe(String cssAttribute, String elementName, String page) {
         actualCssValue = wdc.getCssValue(page, elementName, cssAttribute);
     }
 
-    @And("user click using Actions on the {string}")
+    @And("user click using Actions on {string}")
     public void userClickUsingActionsOnThe(String page) throws InterruptedException {
         wdc.actionsClick();
     }
@@ -193,5 +193,13 @@ public class WebDriverCommonSteps {
         Thread.sleep(time*1000);
     }
 
+    @And("use close browser")
+    public void useCloseBrowser() {
+        wdc.quit();
+    }
 
+    @And("I had breakfast")
+    public void breakFast(){
+
+    }
 }
