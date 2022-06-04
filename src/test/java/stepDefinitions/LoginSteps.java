@@ -1,11 +1,16 @@
 package stepDefinitions;
 
 import connectors.WebDriverConnector;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.messages.Messages;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
+
+import java.util.List;
+import java.util.Map;
 
 public class LoginSteps {
 
@@ -52,6 +57,35 @@ public class LoginSteps {
     @Given("testing background")
     public void testingBackground() {
         System.out.println("Hellow world");
+    }
+
+    @Given("Then Print this as HashMap")
+    public void then_print_this_as_hash_map(io.cucumber.datatable.DataTable dataTable) {
+        Hooks.currentScenario.log(dataTable.toString());
+        for (Map<String, String> personDataMap : dataTable.asMaps()) {
+            Hooks.currentScenario.log(personDataMap.toString());
+            Hooks.currentScenario.log(personDataMap.get("Element"));
+        }
+    }
+
+    @Given("Then Print this as List of HashMap")
+    public void then_print_this_as_list_of_hash_map(io.cucumber.datatable.DataTable dataTable) {
+        Hooks.currentScenario.log(dataTable.toString());
+        List<Map<String, String>> listOfMap = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> l : listOfMap) {
+            Hooks.currentScenario.log(l.toString());
+            Hooks.currentScenario.log(l.get("Element"));
+        }
+    }
+
+    @Given("Then Print this as List of List")
+    public void then_print_this_as_list_of_list(io.cucumber.datatable.DataTable dataTable) {
+        Hooks.currentScenario.log(dataTable.toString());
+        List<List<String>> userList = dataTable.asLists(String.class);
+        for (List<String> l : userList) {
+            Hooks.currentScenario.log(l.toString());
+            Hooks.currentScenario.log(l.get(0));
+        }
     }
 
 }

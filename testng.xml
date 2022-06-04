@@ -5,7 +5,6 @@
         <parameter name="" value=""></parameter>
         <classes>
             <class name="runner.testng.runner_1"/>
-            <class name="runner.testng.runner_2"/>
         </classes>
     </test>
 </suite>

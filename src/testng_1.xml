@@ -4,7 +4,7 @@
     <test name="Test">
         <parameter name="" value=""></parameter>
         <classes>
-            <class name="runner.testng.runner_2"/>
+            <class name="runner.testng.runner_1"/>
         </classes>
     </test>
 </suite>

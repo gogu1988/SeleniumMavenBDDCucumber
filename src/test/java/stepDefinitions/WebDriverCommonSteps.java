@@ -198,8 +198,4 @@ public class WebDriverCommonSteps {
         wdc.quit();
     }
 
-    @And("I had breakfast")
-    public void breakFast(){
-
-    }
 }

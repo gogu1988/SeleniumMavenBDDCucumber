@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import utils.PropertiesFileUtil;
 
 import java.net.URL;
@@ -41,47 +42,53 @@ public class WebDriverConnector {
 
     public WebElement driverWebElement(String pageName, String elementName) {
 
-        WebElement driverWebElement;
+        WebElement driverWebElement = null;
+        try {
 
-        switch (locatorType(pageName, elementName).toLowerCase()) {
+            switch (locatorType(pageName, elementName).toLowerCase()) {
 
-            case "cssSelector":
-                driverWebElement = driver.findElement(By.cssSelector(webElement(pageName, elementName)));
-                break;
+                case "cssselector":
+                    driverWebElement = driver.findElement(By.cssSelector(webElement(pageName, elementName)));
+                    break;
 
-            case "xpath":
-                driverWebElement = driver.findElement(By.xpath(webElement(pageName, elementName)));
-                break;
+                case "xpath":
+                    driverWebElement = driver.findElement(By.xpath(webElement(pageName, elementName)));
+                    break;
 
-            case "linkText":
-                driverWebElement = driver.findElement(By.linkText(webElement(pageName, elementName)));
-                break;
+                case "linktext":
+                    driverWebElement = driver.findElement(By.linkText(webElement(pageName, elementName)));
+                    break;
 
-            case "partialLinkText":
-                driverWebElement = driver.findElement(By.partialLinkText(webElement(pageName, elementName)));
-                break;
+                case "partiallinktext":
+                    driverWebElement = driver.findElement(By.partialLinkText(webElement(pageName, elementName)));
+                    break;
 
-            case "name":
-                driverWebElement = driver.findElement(By.name(webElement(pageName, elementName)));
-                break;
+                case "name":
+                    driverWebElement = driver.findElement(By.name(webElement(pageName, elementName)));
+                    break;
 
-            case "className":
-                driverWebElement = driver.findElement(By.className(webElement(pageName, elementName)));
-                break;
+                case "classname":
+                    driverWebElement = driver.findElement(By.className(webElement(pageName, elementName)));
+                    break;
 
-            case "id":
-                driverWebElement = driver.findElement(By.id(webElement(pageName, elementName)));
-                break;
+                case "id":
+                    driverWebElement = driver.findElement(By.id(webElement(pageName, elementName)));
+                    break;
 
-            default:
-                throw new IllegalStateException("Unexpected value: " + locatorType(pageName, elementName).toLowerCase() + " " + webElement(pageName, elementName));
+                default:
+                    throw new IllegalStateException("Unexpected value: " + locatorType(pageName, elementName).toLowerCase() + " " + webElement(pageName, elementName));
 
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+            Assert.fail("Issue in Locator "+ locatorType(pageName, elementName) +":" + webElement(pageName, elementName) + " with Locator name " + elementName + " on " + pageName);
         }
 
         return driverWebElement;
     }
 
-    public  List<WebElement> driverWebElements(String pageName, String elementName) {
+    public List<WebElement> driverWebElements(String pageName, String elementName) {
 
         List<WebElement> driverWebElements;
 
@@ -145,11 +152,11 @@ public class WebDriverConnector {
         }
     }
 
-    public void windowMaximize(){
+    public void windowMaximize() {
         driver.manage().window().maximize();
     }
 
-    public WebDriver driver(){
+    public WebDriver driver() {
         return driver;
     }
 
@@ -158,11 +165,11 @@ public class WebDriverConnector {
         driver.manage().window().maximize();
     }
 
-    public String getCurrentUrl(){
+    public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return driver.getTitle();
     }
 
@@ -250,7 +257,7 @@ public class WebDriverConnector {
         return findElement;
     }
 
-    public String getPageSource(){
+    public String getPageSource() {
         return driver.getPageSource();
     }
 
@@ -262,86 +269,87 @@ public class WebDriverConnector {
         driver.quit();
     }
 
-    public Set<String> getWindowHandles(){
+    public Set<String> getWindowHandles() {
         return driver.getWindowHandles();
     }
 
-    public String getWindowHandle(){
+    public String getWindowHandle() {
         return driver.getWindowHandle();
     }
 
-    public void switchToFrame(int frameId){
+    public void switchToFrame(int frameId) {
         driver.switchTo().frame(frameId);
     }
-    public void switchToFrame(String frameName){
+
+    public void switchToFrame(String frameName) {
         driver.switchTo().frame(frameName);
     }
 
-    public void switchToFrame(String elementName, String pageName){
+    public void switchToFrame(String elementName, String pageName) {
         driver.switchTo().frame(driverWebElement(pageName, elementName));
     }
 
-    public void switchToParentFrame(String elementName, String pageName){
+    public void switchToParentFrame(String elementName, String pageName) {
         driver.switchTo().parentFrame();
     }
 
-    public void switchToWindow(String windowName){
+    public void switchToWindow(String windowName) {
         driver.switchTo().window(windowName);
     }
 
-    public void switchToDefaultContent(){
+    public void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
 
-    public void switchToActiveElement(){
+    public void switchToActiveElement() {
         driver.switchTo().activeElement();
     }
 
-    public void switchToAlert(){
+    public void switchToAlert() {
         driver.switchTo().alert();
     }
 
-    public void navigateBack(){
+    public void navigateBack() {
         driver.navigate().back();
     }
 
-    public void navigateForward(){
+    public void navigateForward() {
         driver.navigate().forward();
     }
 
-    public void navigateTo(String url){
+    public void navigateTo(String url) {
         driver.navigate().to(url);
     }
 
-    public void navigateTo(URL url){
+    public void navigateTo(URL url) {
         driver.navigate().to(url);
     }
 
-    public void refresh(){
+    public void refresh() {
         driver.navigate().refresh();
     }
 
-    public void addCookie(Cookie cookie){
+    public void addCookie(Cookie cookie) {
         driver.manage().addCookie(cookie);
     }
 
-    public void deleteCookieNamed(String cookieName){
+    public void deleteCookieNamed(String cookieName) {
         driver.manage().deleteCookieNamed(cookieName);
     }
 
-    public void deleteCookie(Cookie cookie){
+    public void deleteCookie(Cookie cookie) {
         driver.manage().deleteCookie(cookie);
     }
 
-    public void deleteAllCookies(){
+    public void deleteAllCookies() {
         driver.manage().deleteAllCookies();
     }
 
-    public Set<Cookie> getCookies(){
-       return driver.manage().getCookies();
+    public Set<Cookie> getCookies() {
+        return driver.manage().getCookies();
     }
 
-    public Cookie getCookieNamed(String cookieName){
+    public Cookie getCookieNamed(String cookieName) {
         return driver.manage().getCookieNamed(cookieName);
     }
 
@@ -349,42 +357,42 @@ public class WebDriverConnector {
         driver.manage().timeouts().implicitlyWait(Integer.parseInt(pfc.frameworkConfig().getProperty("implicitlyWait")), TimeUnit.SECONDS);
     }
 
-    public void setScriptTimeout(){
+    public void setScriptTimeout() {
         driver.manage().timeouts().setScriptTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("setScriptTimeout")), TimeUnit.SECONDS);
     }
 
-    public void pageLoadTimeout(){
+    public void pageLoadTimeout() {
         driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
     }
 
-    public WebDriverWait explicitWait(int sec){
-        return new WebDriverWait(driver,sec);
+    public WebDriverWait explicitWait(int sec) {
+        return new WebDriverWait(driver, sec);
     }
 
-    public Wait fluentWait(int timeout, int pollingTime){
+    public Wait fluentWait(int timeout, int pollingTime) {
         return new FluentWait(driver)
                 .withTimeout(timeout, TimeUnit.SECONDS)
                 .pollingEvery(pollingTime, TimeUnit.SECONDS)
                 .ignoring(Exception.class);
     }
 
-    public List<String> getAvailableEngines(){
+    public List<String> getAvailableEngines() {
         return driver.manage().ime().getAvailableEngines();
     }
 
-    public String getActiveEngine(){
+    public String getActiveEngine() {
         return driver.manage().ime().getActiveEngine();
     }
 
-    public boolean engineIsActivated(){
+    public boolean engineIsActivated() {
         return driver.manage().ime().isActivated();
     }
 
-    public void engineDeactivate(){
+    public void engineDeactivate() {
         driver.manage().ime().deactivate();
     }
 
-    public void activateEngine(String engineName){
+    public void activateEngine(String engineName) {
         driver.manage().ime().activateEngine(engineName);
     }
 
@@ -414,7 +422,7 @@ public class WebDriverConnector {
     }
 
     public boolean isSelected(String pageName, String elementName) {
-       return driverWebElement(pageName, elementName).isSelected();
+        return driverWebElement(pageName, elementName).isSelected();
     }
 
     public boolean isEnabled(String pageName, String elementName) {
@@ -451,64 +459,60 @@ public class WebDriverConnector {
         return new Actions(driver);
     }
 
-    public void actionsClick(){
+    public void actionsClick() {
         actions().click().perform();
     }
 
-    public void actionsClick(String pageName, String elementName){
+    public void actionsClick(String pageName, String elementName) {
         actions().click(driverWebElement(pageName, elementName)).perform();
     }
 
-    public void actionsClickAndHold(){
+    public void actionsClickAndHold() {
         actions().clickAndHold().perform();
     }
 
-    public void actionsClickAndHold(String pageName, String elementName){
+    public void actionsClickAndHold(String pageName, String elementName) {
         actions().clickAndHold(driverWebElement(pageName, elementName)).perform();
     }
 
-    public void actionsContextClick(){
+    public void actionsContextClick() {
         actions().contextClick().perform();
     }
 
-    public void actionsContextClick(String pageName, String elementName){
+    public void actionsContextClick(String pageName, String elementName) {
         actions().contextClick(driverWebElement(pageName, elementName)).perform();
     }
 
-    public void actionsDoubleClick(){
+    public void actionsDoubleClick() {
         actions().doubleClick().perform();
     }
 
-    public void actionsDoubleClick(String pageName, String elementName){
+    public void actionsDoubleClick(String pageName, String elementName) {
         actions().doubleClick(driverWebElement(pageName, elementName)).perform();
     }
 
-    public void actionsDragAndDrop(String pageName, String sourceElementName, String targetElementName){
+    public void actionsDragAndDrop(String pageName, String sourceElementName, String targetElementName) {
         actions().dragAndDrop(driverWebElement(pageName, sourceElementName), driverWebElement(pageName, targetElementName)).perform();
     }
 
-    public void actionsDragAndDropBy(String pageName, String elementName, int x, int y){
-        actions().dragAndDropBy(driverWebElement(pageName, elementName), x ,y).perform();
+    public void actionsDragAndDropBy(String pageName, String elementName, int x, int y) {
+        actions().dragAndDropBy(driverWebElement(pageName, elementName), x, y).perform();
     }
 
-    public void actionsMoveByOffset(int x, int y){
+    public void actionsMoveByOffset(int x, int y) {
         actions().moveByOffset(x, y).perform();
     }
 
-    public void actionsMoveToElement(String pageName, String elementName){
+    public void actionsMoveToElement(String pageName, String elementName) {
         actions().moveToElement(driverWebElement(pageName, elementName)).perform();
     }
 
-    public void actionsMoveToElement(String pageName, String elementName, int x, int y){
+    public void actionsMoveToElement(String pageName, String elementName, int x, int y) {
         actions().moveToElement(driverWebElement(pageName, elementName), x, y).perform();
     }
 
-    public void actionsSendKeys(String pageName, String elementName, String text){
+    public void actionsSendKeys(String pageName, String elementName, String text) {
         actions().sendKeys(driverWebElement(pageName, elementName), text).perform();
-    }
-
-    public void getScreenshotAs(String pageName, String elementName) {
-        driverWebElement(pageName, elementName).getScreenshotAs(OutputType.FILE);
     }
 
     public byte[] takeScreenshot() {

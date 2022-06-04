@@ -1,3 +1,5 @@
+@Wallte
+
 Feature: Wallet Company Demo
 
   Scenario Outline:

@@ -19,7 +19,7 @@ import org.testng.annotations.*;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Login"
+        tags = "@Login1"
 )
 public class runner_1 extends AbstractTestNGCucumberTests {
 
@@ -42,12 +42,6 @@ public class runner_1 extends AbstractTestNGCucumberTests {
     public void BeforeMethod() {
         System.out.println("Executing BeforeMethod");
     }
-
-    @Test
-    public void test(){
-        System.out.println("At the test method");
-    }
-
 
     @Override
     @DataProvider(parallel = true)
