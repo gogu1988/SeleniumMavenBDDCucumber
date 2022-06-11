@@ -30,7 +30,6 @@ public class Hooks {
 
     @Then("user take screen shot as {string}")
     public void userTakeScreenShot(String screenShotName) {
-        wdc.takeScreenshot();
         currentScenario.attach(wdc.takeScreenshot(), "img/png", screenShotName);
     }
 
@@ -44,10 +43,10 @@ public class Hooks {
     public void tearDown() {
         System.out.println("After Hooks");
         if (currentScenario.isFailed()) {
-            wdc.takeScreenshot();
             currentScenario.attach(wdc.takeScreenshot(), "img/png", "FailedScreenshot");
             wdc.quit();
         }
+
 
     }
 

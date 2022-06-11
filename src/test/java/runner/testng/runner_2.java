@@ -15,13 +15,13 @@ import org.testng.annotations.DataProvider;
                 "timeline:target/testng/runner_2"
         },
         glue = {"stepDefinitions"},
-        features = {"@target/testng/runner_1/rerun.txt"},
+        features = {"src/test/resources/features"},
         tags = "@Login"
 )
 public class runner_2 extends AbstractTestNGCucumberTests {
 
     @Override
-    @DataProvider(parallel = true)
+    @DataProvider
     public Object[][] scenarios() {
         return super.scenarios();
     }

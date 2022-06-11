@@ -7,6 +7,7 @@ Feature: Run 1 Testing Login Feature
 
   Scenario Outline: Login Scenario 1
     Given user open "<Browser>" browser
+    And user get "http://inblrsclfsnt001.global.publicisgroupe.net:4502/aem/start.html" url
     And user navigate to the google page
     And user get Text of "<Element>" on "loginPage"
     Then user verify element text "<ExpectedText>"
@@ -18,7 +19,7 @@ Feature: Run 1 Testing Login Feature
     When user get Rect of "<Element>" on "loginPage"
     When user get CssValue of "background-color" of "<Element>" on "loginPage"
     And user click using Actions on "loginPage"
-    And use close browser
+    And user close browser
 
     Examples:
       | Browser | Element | ExpectedText |

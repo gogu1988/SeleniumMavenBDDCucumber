@@ -193,7 +193,7 @@ public class WebDriverCommonSteps {
         Thread.sleep(time*1000);
     }
 
-    @And("use close browser")
+    @And("user close browser")
     public void useCloseBrowser() {
         wdc.quit();
     }

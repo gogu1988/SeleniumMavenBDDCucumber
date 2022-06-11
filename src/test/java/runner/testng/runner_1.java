@@ -44,7 +44,7 @@ public class runner_1 extends AbstractTestNGCucumberTests {
     }
 
     @Override
-    @DataProvider(parallel = true)
+    @DataProvider
     public Object[][] scenarios() {
         return super.scenarios();
     }
