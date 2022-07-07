@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import connectors.WebDriverConnector;
-import enumPack.WebElementAttributes;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,12 +9,15 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
+import utils.PropertiesFileUtil;
 
 import java.util.List;
+import java.util.Properties;
 
 public class WebDriverCommonSteps {
 
     WebDriverConnector wdc;
+    PropertiesFileUtil pfu;
     static String actualTagName, actualAttribute, actualText, actualCssValue;
     static boolean isSelected, isEnabled, isDisplayed;
     static List<WebElement> actualElements;
@@ -24,8 +26,18 @@ public class WebDriverCommonSteps {
     static Dimension actualSize;
     static Rectangle actualRect;
 
-    public WebDriverCommonSteps(WebDriverConnector wdc) {
+    public WebDriverCommonSteps(WebDriverConnector wdc, PropertiesFileUtil pfu) {
         this.wdc = wdc;
+        this.pfu = pfu;
+    }
+
+    @Given("user open {string} browser")
+    public void userOpenBrowser(String browser) {
+        wdc.openBrowser(browser);
+        wdc.implicitlyWait();
+        wdc.windowMaximize();
+        wdc.pageLoadTimeout();
+        wdc.setScriptTimeout();
     }
 
     @And("user click the {string} on the {string}")
@@ -183,14 +195,10 @@ public class WebDriverCommonSteps {
         wdc.actionsSendKeys(page, elementName, text);
     }
 
-    @Then("user get {string} url")
-    public void userGetUrl(String url) {
-        wdc.get(url);
-    }
 
     @And("user wait for {int} sec")
     public void userWaitForSec(int time) throws InterruptedException {
-        Thread.sleep(time*1000);
+        Thread.sleep(time * 1000);
     }
 
     @And("user close browser")
@@ -198,4 +206,11 @@ public class WebDriverCommonSteps {
         wdc.quit();
     }
 
+    @And("user get {string} url")
+    public void userGetUrl(String url) {
+        if (url.contains("http"))
+            wdc.get(url);
+        else
+            wdc.get(pfu.appConfig().getProperty(url));
+    }
 }

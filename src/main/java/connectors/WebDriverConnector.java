@@ -162,7 +162,6 @@ public class WebDriverConnector {
 
     public void get(String url) {
         driver.get(url);
-        driver.manage().window().maximize();
     }
 
     public String getCurrentUrl() {

@@ -33,6 +33,6 @@ Feature: WebDriver Common Steps
     And user move the mouse to the "dragble_Element" on the "loginPage"
     And user move the mouse to the "dragble_Element" with the position x:1643 and y:18 on the "loginPage"
     And user sendKeys "Hello" in "postEditBox" using actions on the "HomePage"
-    Then user take screen shot
+    Then user take screen shot as "loginPage"
     Then user write the log as "Hello this is log"
     Examples:
