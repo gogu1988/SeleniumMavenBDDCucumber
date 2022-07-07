@@ -8,12 +8,12 @@ import org.testng.annotations.*;
         dryRun = false,
         monochrome = true,
         plugin = {"pretty",
-                "de.monochromata.cucumber.report.PrettyReports:target/testng/runner_1", // To generate Cucumber Html Reports
-                "json:target/testng/runner_1/cucumber.json",
-                "junit:target/testng/runner_1/cucumber.xml",
-                "rerun:target/testng/runner_1/rerun.txt",
-                "timeline:target/testng/runner_1/timelineReports",
-                "html:target/testng/runner_1/htmlReports.html"
+                "de.monochromata.cucumber.report.PrettyReports:target", // To generate Cucumber Html Reports
+                "json:target/cucumber.json",
+                "junit:target/cucumber.xml",
+                "rerun:target/rerun.txt",
+                "timeline:target/timelineReports",
+                "html:target/htmlReports.html"
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
