@@ -1,7 +1,7 @@
 @Demo
 Feature: Demo
 
-  Scenario: Login to Author page
+  Scenario: Login for demo purpose
     Given user open "Chrome" browser
     And user get "AuthorInstance" url
     And user sendKeys "admin" in "UserName_EditBox" on the "Author_Login_Page"
