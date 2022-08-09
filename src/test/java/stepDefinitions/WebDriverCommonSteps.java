@@ -5,12 +5,18 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.testng.Assert;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import utils.PropertiesFileUtil;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,6 +24,8 @@ public class WebDriverCommonSteps {
 
     WebDriverConnector wdc;
     PropertiesFileUtil pfu;
+
+    Hooks hooks;
     static String actualTagName, actualAttribute, actualText, actualCssValue;
     static boolean isSelected, isEnabled, isDisplayed;
     static List<WebElement> actualElements;
@@ -25,10 +33,12 @@ public class WebDriverCommonSteps {
     static Point actualLocation;
     static Dimension actualSize;
     static Rectangle actualRect;
+    static int numberOfWindows;
 
-    public WebDriverCommonSteps(WebDriverConnector wdc, PropertiesFileUtil pfu) {
+    public WebDriverCommonSteps(WebDriverConnector wdc, PropertiesFileUtil pfu, Hooks hooks) {
         this.wdc = wdc;
         this.pfu = pfu;
+        this.hooks = hooks;
     }
 
     @Given("user open {string} browser")
@@ -52,7 +62,9 @@ public class WebDriverCommonSteps {
 
     @And("user sendKeys {string} in {string} on the {string}")
     public void userSendKeysInOnThe(String text, String elementName, String page) {
-        wdc.sendKeys(page, elementName, text);
+        wdc.sendKeys(page,elementName,text);
+
+
     }
 
     @And("user sendKeys below para in {string} on the {string}")
@@ -77,7 +89,8 @@ public class WebDriverCommonSteps {
 
     @Then("user verify {string} isDisplayed on the {string}")
     public void userVerifyIsDisplayedOnThe(String elementName, String page) {
-        isDisplayed = wdc.isDisplayed(page, elementName);
+        if (!wdc.isDisplayed(page, elementName))
+            Assert.fail(elementName + " is not displayed on " + page);
     }
 
     @When("user get Text of {string} on {string}")
@@ -212,5 +225,117 @@ public class WebDriverCommonSteps {
             wdc.get(url);
         else
             wdc.get(pfu.appConfig().getProperty(url));
+    }
+
+    @Then("user verify {string} message is displayed on the Alert")
+    public void userVerifyMessageIsDisplayedOnThePop(String expectedText) {
+        wdc.getTextOnAlert();
+        if (!(wdc.getTextOnAlert().trim().equals(expectedText)))
+            Assert.fail("Expected and Actual text are not equal. Expected: " + expectedText + " | Actual: " + wdc.getTextOnAlert());
+        else
+            hooks.currentScenario.log("Expected and Actual text are equal. Expected: " + expectedText + " | Actual: " + wdc.getTextOnAlert());
+    }
+
+    @Then("user verify that a new page opened in new tab with page title as {string}")
+    public void userVerifyThatANewPageOpenendInNewTabWithPageTitleAs(String pageTitle) throws InterruptedException {
+        if (wdc.getWindowHandles().size() >= 2) {
+            wdc.switchToWindowWithTitle(pageTitle);
+            if (!wdc.getTitle().equalsIgnoreCase(pageTitle))
+                Assert.fail("Expected window title is not equal to actual window title. Expected: " + pageTitle + " | Actual: " + wdc.getTitle());
+        } else
+            Assert.fail("No new window opened");
+    }
+
+    @Then("user verify that a new page opened in new tab with page title contains {string}")
+    public void userVerifyThatANewPageOpenendInNewTabWithPageTitleContains(String pageTitle) throws InterruptedException {
+        if (wdc.getWindowHandles().size() == 2) {
+            wdc.switchToWindowContainTitle(pageTitle);
+            if (!wdc.getTitle().contains(pageTitle))
+                Assert.fail("Expected window title does not contain actual window title. Expected: " + pageTitle + " | Actual: " + wdc.getTitle());
+        } else
+            Assert.fail("No new window opened");
+    }
+
+    @Then("user verify that a new page opened in same tab with page title as {string}")
+    public void userVerifyThatANewPageOpenedInSameTabWithPageTitleAs(String pageTitle) {
+        if (wdc.getWindowHandles().size() == numberOfWindows) {
+            if (!wdc.getTitle().equalsIgnoreCase(pageTitle))
+                Assert.fail("Expected window title is not equal to actual window title. Expected: " + pageTitle + " | Actual: " + wdc.getTitle());
+        } else
+            Assert.fail("New window opened");
+    }
+
+    @Then("user verify the match")
+    public void userVerifyTheMatch() throws IOException {
+        WebElement emailSubscribe = wdc.driver().findElement(By.xpath("//*[@class='cmp-email-subscribe']"));
+        Screenshot emailSubscribeScreenshot = new AShot().takeScreenshot(wdc.driver(), emailSubscribe);
+        ImageIO.write(emailSubscribeScreenshot.getImage(), "png", new File("C:\\Users\\govreddy\\IdeaProjects\\ntflexshares-qa\\src\\test\\resources\\sikuli\\actualImage.png"));
+    }
+
+    @Then("user take screen shot of {string} on the {string} and save it as {string} at {string}")
+    public void userTakeScreenShotOnTheAndSaveItAsAt(String element, String page, String screenshotName, String location) {
+        wdc.saveWebElementScreenshot(element, page, screenshotName, location);
+    }
+
+    @Then("user verify that {string} on the {string} and {string} image are same")
+    public void userVerifyThatOnTheAndImageAreSame(String elementName, String pageName, String expectedImage) throws IOException {
+        BufferedImage expected = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\test\\resources\\pics\\" + expectedImage + ".png"));
+        BufferedImage actual = wdc.getImageOfWebElement(elementName, pageName);
+        ImageDiffer imgDiff = new ImageDiffer();
+        ImageDiff diff = imgDiff.makeDiff(expected, actual);
+        if (diff.hasDiff() == true) {
+            try {
+                userTakeScreenShotOnTheAndSaveItAsAt(elementName, pageName, expectedImage.split("\\\\")[2] + "_actual", expectedImage.split("\\\\")[0]);
+            } catch (Exception e) {
+                userTakeScreenShotOnTheAndSaveItAsAt(elementName, pageName, expectedImage.split("\\\\")[1] + "_actual", expectedImage.split("\\\\")[0]);
+            }
+            Assert.fail("Both images are not same");
+        }
+    }
+
+    @And("user go to backward page")
+    public void userGoToBackwardPage() {
+        wdc.navigateBack();
+    }
+
+    @And("user go to forward page")
+    public void userGoToForwardPage() {
+        wdc.navigateForward();
+    }
+
+    @And("user switch to window with the title as {string}")
+    public void userSwitchToWindowWithTheTitleAs(String windowTitle) {
+        wdc.switchToWindowWithTitle(windowTitle);
+    }
+
+    @Then("user verify that a new page opened in same tab with page title not as {string}")
+    public void userVerifyThatANewPageOpenedInSameTabWithPageTitleNotAs(String pageTitle) {
+        if (wdc.getWindowHandles().size() == 1) {
+            if (wdc.getTitle().equalsIgnoreCase(pageTitle))
+                Assert.fail("Expected window title is equal to actual window title. Expected: " + pageTitle + " | Actual: " + wdc.getTitle());
+        } else
+            Assert.fail("New window opened");
+    }
+
+    @Then("user verify the text of {string} on the {string} is equal to {string}")
+    public void userVerifyTheTextOfOnTheIsEqualTo(String elementName, String pageName, String expectedText) {
+        if (!wdc.getText(pageName, elementName).trim().equals(expectedText))
+            Assert.fail("Expected and Actual text are not same. Actual_Text: " + expectedText + " | Expected_Text: " + wdc.getText(pageName, elementName).trim());
+
+    }
+
+    @And("user scroll into view using java script for {string} on the {string}")
+    public void userScrollIntoViewUsingJavaScriptForOnThe(String elementName, String pageName) {
+        wdc.javaScriptScrollIntoView(elementName, pageName);
+    }
+
+    @And("user close active tab in the browser")
+    public void userCloseActiveTabInTheBrowser() {
+        wdc.close();
+    }
+
+    @And("user store number of tabs in the browser")
+    public void userStoreNumberOfTabsInTheBrowser() {
+        numberOfWindows = wdc.numberOfWindows();
     }
 }

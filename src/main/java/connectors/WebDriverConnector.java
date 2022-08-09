@@ -1,29 +1,69 @@
 package connectors;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v85.emulation.Emulation;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import ru.yandex.qatools.ashot.AShot;
 import utils.PropertiesFileUtil;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.time.Duration;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class WebDriverConnector {
 
     WebDriver driver;
+    ChromeDriver mobileDriver;
     PropertiesFileUtil pfc;
 
     public WebDriverConnector(PropertiesFileUtil pfc) {
         this.pfc = pfc;
+    }
+
+    public void openBrowser(String browserName) {
+
+        switch (browserName.toLowerCase()) {
+
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+
+            case "ie":
+                WebDriverManager.iedriver().setup();
+                driver = new InternetExplorerDriver();
+                break;
+
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
+                break;
+
+            default:
+                Assert.fail("Specify browser type as Chrome or Firefox or Edge or IE. Given browser is " + browserName);
+
+        }
+
     }
 
     public String webElementReader(String pageName, String elementName) {
@@ -82,7 +122,7 @@ public class WebDriverConnector {
 
         } catch (Exception e) {
             e.getMessage();
-            Assert.fail("Issue in Locator "+ locatorType(pageName, elementName) +":" + webElement(pageName, elementName) + " with Locator name " + elementName + " on " + pageName);
+            Assert.fail("Issue in Locator " + locatorType(pageName, elementName) + ":" + webElement(pageName, elementName) + " with Locator name " + elementName + " on " + pageName);
         }
 
         return driverWebElement;
@@ -130,27 +170,6 @@ public class WebDriverConnector {
         return driverWebElements;
     }
 
-    public void openBrowser(String browserName) {
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//drivers//chromedriver.exe");
-        System.setProperty("webdriver.firefox.driver", System.getProperty("user.dir") + "//drivers//geckodriver.exe");
-        System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "//drivers//IEDriverServer.exe");
-
-        switch (browserName.toLowerCase()) {
-
-            case "chrome":
-                driver = new ChromeDriver();
-                break;
-
-            case "firefox":
-                driver = new FirefoxDriver();
-                break;
-
-            case "ie":
-                driver = new InternetExplorerDriver();
-                break;
-
-        }
-    }
 
     public void windowMaximize() {
         driver.manage().window().maximize();
@@ -296,6 +315,48 @@ public class WebDriverConnector {
         driver.switchTo().window(windowName);
     }
 
+    public void switchToWindowWithTitle(String windowTitle) {
+        String mainWindowHandle = getWindowHandle();
+        Set<String> allWindowHandles = getWindowHandles();
+        Iterator<String> iterator = allWindowHandles.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            i++;
+            String ChildWindow = iterator.next();
+            if (!mainWindowHandle.equalsIgnoreCase(ChildWindow)) {
+                switchToWindow(ChildWindow);
+                if (windowTitle.equalsIgnoreCase(getTitle()))
+                    break;
+                else if (i == allWindowHandles.size()){
+                    Assert.fail("Not able to find the page with the title " + windowTitle);
+                }
+            }
+        }
+    }
+
+    public void switchToWindowContainTitle(String windowTitle) {
+        String mainWindowHandle = getWindowHandle();
+        Set<String> allWindowHandles = getWindowHandles();
+        Iterator<String> iterator = allWindowHandles.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            i++;
+            String ChildWindow = iterator.next();
+            if (!mainWindowHandle.equalsIgnoreCase(ChildWindow)) {
+                switchToWindow(ChildWindow);
+                if (getTitle().contains(windowTitle))
+                    break;
+                else if (i == allWindowHandles.size()){
+                    Assert.fail("Not able to find the page contains the title " + windowTitle);
+                }
+            }
+        }
+    }
+
+    public void openNewTab() {
+        driver.switchTo().newWindow(WindowType.TAB);
+    }
+
     public void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
@@ -304,8 +365,12 @@ public class WebDriverConnector {
         driver.switchTo().activeElement();
     }
 
-    public void switchToAlert() {
-        driver.switchTo().alert();
+    public Alert switchToAlert() {
+        return driver.switchTo().alert();
+    }
+
+    public String getTextOnAlert() {
+        return driver.switchTo().alert().getText();
     }
 
     public void navigateBack() {
@@ -364,14 +429,14 @@ public class WebDriverConnector {
         driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
     }
 
-    public WebDriverWait explicitWait(int sec) {
-        return new WebDriverWait(driver, sec);
-    }
+//    public WebDriverWait explicitWait(Duration sec) {
+//        return new WebDriverWait(driver, sec);
+//    }
 
-    public Wait fluentWait(int timeout, int pollingTime) {
+    public Wait fluentWait(Duration timeout, Duration pollingTime) {
         return new FluentWait(driver)
-                .withTimeout(timeout, TimeUnit.SECONDS)
-                .pollingEvery(pollingTime, TimeUnit.SECONDS)
+                .withTimeout(timeout)
+                .pollingEvery(pollingTime)
                 .ignoring(Exception.class);
     }
 
@@ -516,6 +581,36 @@ public class WebDriverConnector {
 
     public byte[] takeScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    public void saveWebElementScreenshot(String elementName, String pageName, String screenshotName, String location) {
+        try{
+            File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\pics\\"+ location);
+            if(!file.exists())
+                file.mkdir();
+            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File(System.getProperty("user.dir")+"\\src\\test\\resources\\pics\\"+ location + "\\"+screenshotName+".png"));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            Assert.fail("Not able to take the screen shot of the element "+ elementName + "on " + pageName);
+        }
+    }
+
+    public BufferedImage getImageOfWebElement(String elementName, String pageName){
+        return (new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage();
+    }
+
+    public void elementToBeClickable(String elementName, String pageName, int sec){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+        wait.until(ExpectedConditions.elementToBeClickable(driverWebElement(pageName, elementName)));
+    }
+
+    public void javaScriptScrollIntoView(String elementName, String pageName) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", driverWebElement(pageName, elementName));
+    }
+
+    public int numberOfWindows(){
+       return driver.getWindowHandles().size();
     }
 
 }

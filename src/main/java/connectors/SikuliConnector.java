@@ -1,26 +1,22 @@
 package connectors;
 
-import org.sikuli.script.FindFailed;
-import org.sikuli.script.Pattern;
-import org.sikuli.script.Screen;
-import utils.JsonFileUtil;
-
-import javax.swing.text.PasswordView;
+import org.sikuli.script.*;
 
 public class SikuliConnector {
 
     Screen screen;
-    JsonFileUtil jfu;
 
-    public SikuliConnector(){
+    public SikuliConnector() {
+        screen();
     }
 
     public void screen() {
         screen = new Screen();
     }
 
-    public void pattern(String imagePath){
+    public Pattern pattern(String imagePath) {
         Pattern pattern = new Pattern(imagePath);
+        return pattern;
     }
 
     public void click(Pattern pattern) throws FindFailed {
@@ -30,5 +26,10 @@ public class SikuliConnector {
     public void type(Pattern pattern, String text) throws FindFailed {
         screen.type(pattern, text);
     }
+
+    public Match exists(Pattern pattern) {
+       return screen.exists(pattern);
+    }
+
 
 }

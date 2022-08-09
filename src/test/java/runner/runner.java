@@ -17,7 +17,7 @@ import org.testng.annotations.*;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Author"
+        tags = "@Demo"
 )
 public class runner extends AbstractTestNGCucumberTests {
 

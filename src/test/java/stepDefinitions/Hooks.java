@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import connectors.DatabaseConnector;
+import connectors.MobileDriverConnector;
 import connectors.WebDriverConnector;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -13,12 +14,13 @@ public class Hooks {
 
     WebDriverConnector wdc;
     DatabaseConnector dbc;
+    MobileDriverConnector mdc;
+    public Scenario currentScenario;
 
-    public static Scenario currentScenario;
-
-    public Hooks(WebDriverConnector wdc, DatabaseConnector dbc) {
+    public Hooks(WebDriverConnector wdc, DatabaseConnector dbc, MobileDriverConnector mdc) {
         this.wdc = wdc;
         this.dbc = dbc;
+        this.mdc = mdc;
     }
 
     @Before
@@ -43,8 +45,14 @@ public class Hooks {
     public void tearDown() {
         System.out.println("After Hooks");
         if (currentScenario.isFailed()) {
-            currentScenario.attach(wdc.takeScreenshot(), "img/png", "FailedScreenshot");
-            wdc.quit();
+            if (wdc.driver() != null) {
+                currentScenario.attach(wdc.takeScreenshot(), "img/png", "FailedScreenshot");
+                wdc.quit();
+            }
+            if (mdc.mobileDriver() != null) {
+                currentScenario.attach(mdc.takeScreenshot(), "img/png", "FailedScreenshot");
+                mdc.quit();
+            }
         }
 
 
