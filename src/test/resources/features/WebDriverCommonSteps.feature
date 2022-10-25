@@ -21,7 +21,7 @@ Feature: WebDriver Common Steps
     When user get CssValue of "background-color" of "button" on "RegisterPage"
     And user click using Actions on "LoginPage"
     And user click the "button" using Actions on the "loginPage"
-    And user clickAndHold using Actions on the "loginPage"
+    When user clickAndHold using Actions on the "loginPage"
     And user clickAndHold the "button" using Actions on the "loginPage"
     And user right click using Actions on the "loginPage"
     And user right click the "button" using Actions on the "loginPage"
@@ -35,4 +35,11 @@ Feature: WebDriver Common Steps
     And user sendKeys "Hello" in "postEditBox" using actions on the "HomePage"
     Then user take screen shot as "loginPage"
     Then user write the log as "Hello this is log"
+    Then user take screen shot of "Email_Subscribe_section" on the "Component_Page" and save it as "Email_Subscribe_section" at "actual_image"
+    Then user verify that "Email_Subscribe_Section" on the "Component_Page" and "<Expected_Image>" image are same in Mobile
+    And user go to backward page
+    And user go to forward page
+    And user switch to window with the title as "google"
+    And user scroll into view using java script for "Email_Subscribe_Section" on the "Component_Page" in Mobile
+
     Examples:

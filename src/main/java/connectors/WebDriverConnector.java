@@ -3,6 +3,7 @@ package connectors;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v85.emulation.Emulation;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -57,6 +58,14 @@ public class WebDriverConnector {
             case "edge":
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
+                break;
+
+            case "chrome_headless":
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                options.addArguments("window-size=1920,1080");
+                driver = new ChromeDriver(options);
                 break;
 
             default:
@@ -327,7 +336,7 @@ public class WebDriverConnector {
                 switchToWindow(ChildWindow);
                 if (windowTitle.equalsIgnoreCase(getTitle()))
                     break;
-                else if (i == allWindowHandles.size()){
+                else if (i == allWindowHandles.size()) {
                     Assert.fail("Not able to find the page with the title " + windowTitle);
                 }
             }
@@ -346,7 +355,7 @@ public class WebDriverConnector {
                 switchToWindow(ChildWindow);
                 if (getTitle().contains(windowTitle))
                     break;
-                else if (i == allWindowHandles.size()){
+                else if (i == allWindowHandles.size()) {
                     Assert.fail("Not able to find the page contains the title " + windowTitle);
                 }
             }
@@ -584,22 +593,24 @@ public class WebDriverConnector {
     }
 
     public void saveWebElementScreenshot(String elementName, String pageName, String screenshotName, String location) {
-        try{
-            File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\pics\\"+ location);
-            if(!file.exists())
+        try {
+            File file = new File("/fsnt/qa/automation/pics/" + location);
+//            File file = new File(System.getProperty("user.dir") + "\\src\\test\\resources\\pics\\" + location);
+            if (!file.exists())
                 file.mkdir();
-            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File(System.getProperty("user.dir")+"\\src\\test\\resources\\pics\\"+ location + "\\"+screenshotName+".png"));
-        } catch (Exception e){
+            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File("/fsnt/qa/automation/pics/" + location + "/" + screenshotName + ".png"));
+//            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File(System.getProperty("user.dir") + "\\src\\test\\resources\\pics\\" + location + "\\" + screenshotName + ".png"));
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            Assert.fail("Not able to take the screen shot of the element "+ elementName + "on " + pageName);
+            Assert.fail("Not able to take the screen shot of the element " + elementName + "on " + pageName);
         }
     }
 
-    public BufferedImage getImageOfWebElement(String elementName, String pageName){
+    public BufferedImage getImageOfWebElement(String elementName, String pageName) {
         return (new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage();
     }
 
-    public void elementToBeClickable(String elementName, String pageName, int sec){
+    public void elementToBeClickable(String elementName, String pageName, int sec) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
         wait.until(ExpectedConditions.elementToBeClickable(driverWebElement(pageName, elementName)));
     }
@@ -609,8 +620,8 @@ public class WebDriverConnector {
         js.executeScript("arguments[0].scrollIntoView(true);", driverWebElement(pageName, elementName));
     }
 
-    public int numberOfWindows(){
-       return driver.getWindowHandles().size();
+    public int numberOfWindows() {
+        return driver.getWindowHandles().size();
     }
 
 }

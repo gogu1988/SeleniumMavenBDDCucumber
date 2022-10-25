@@ -17,7 +17,7 @@ import org.testng.annotations.*;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Demo"
+        tags = "@Verify_the_Bookmark_feature_in_Windows_Machine"
 )
 public class runner extends AbstractTestNGCucumberTests {
 
@@ -42,7 +42,7 @@ public class runner extends AbstractTestNGCucumberTests {
     }
 
     @Override
-    @DataProvider
+    @DataProvider(parallel = true)
     public Object[][] scenarios() {
         return super.scenarios();
     }

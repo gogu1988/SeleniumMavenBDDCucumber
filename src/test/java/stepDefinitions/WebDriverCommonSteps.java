@@ -6,19 +6,20 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import utils.PropertiesFileUtil;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 
 public class WebDriverCommonSteps {
 
@@ -62,9 +63,7 @@ public class WebDriverCommonSteps {
 
     @And("user sendKeys {string} in {string} on the {string}")
     public void userSendKeysInOnThe(String text, String elementName, String page) {
-        wdc.sendKeys(page,elementName,text);
-
-
+        wdc.sendKeys(page, elementName, text);
     }
 
     @And("user sendKeys below para in {string} on the {string}")
@@ -265,13 +264,6 @@ public class WebDriverCommonSteps {
             Assert.fail("New window opened");
     }
 
-    @Then("user verify the match")
-    public void userVerifyTheMatch() throws IOException {
-        WebElement emailSubscribe = wdc.driver().findElement(By.xpath("//*[@class='cmp-email-subscribe']"));
-        Screenshot emailSubscribeScreenshot = new AShot().takeScreenshot(wdc.driver(), emailSubscribe);
-        ImageIO.write(emailSubscribeScreenshot.getImage(), "png", new File("C:\\Users\\govreddy\\IdeaProjects\\ntflexshares-qa\\src\\test\\resources\\sikuli\\actualImage.png"));
-    }
-
     @Then("user take screen shot of {string} on the {string} and save it as {string} at {string}")
     public void userTakeScreenShotOnTheAndSaveItAsAt(String element, String page, String screenshotName, String location) {
         wdc.saveWebElementScreenshot(element, page, screenshotName, location);
@@ -279,15 +271,16 @@ public class WebDriverCommonSteps {
 
     @Then("user verify that {string} on the {string} and {string} image are same")
     public void userVerifyThatOnTheAndImageAreSame(String elementName, String pageName, String expectedImage) throws IOException {
-        BufferedImage expected = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\test\\resources\\pics\\" + expectedImage + ".png"));
+        BufferedImage expected = ImageIO.read(new File( "/fsnt/qa/automation/pics/" + expectedImage + ".png"));
+//        BufferedImage expected = ImageIO.read(new File(System.getProperty("user.dir") + "/src/test/resources/pics/" + expectedImage + ".png"));
         BufferedImage actual = wdc.getImageOfWebElement(elementName, pageName);
         ImageDiffer imgDiff = new ImageDiffer();
         ImageDiff diff = imgDiff.makeDiff(expected, actual);
         if (diff.hasDiff() == true) {
             try {
-                userTakeScreenShotOnTheAndSaveItAsAt(elementName, pageName, expectedImage.split("\\\\")[2] + "_actual", expectedImage.split("\\\\")[0]);
+                userTakeScreenShotOnTheAndSaveItAsAt(elementName, pageName, expectedImage.split("/")[2] + "_actual", expectedImage.split("/")[0]);
             } catch (Exception e) {
-                userTakeScreenShotOnTheAndSaveItAsAt(elementName, pageName, expectedImage.split("\\\\")[1] + "_actual", expectedImage.split("\\\\")[0]);
+                userTakeScreenShotOnTheAndSaveItAsAt(elementName, pageName, expectedImage.split("/")[1] + "_actual", expectedImage.split("/")[0]);
             }
             Assert.fail("Both images are not same");
         }
