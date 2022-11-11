@@ -17,7 +17,7 @@ import org.testng.annotations.*;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Verify_the_Bookmark_feature_in_Windows_Machine"
+        tags = "@Chrome_Headless"
 )
 public class runner extends AbstractTestNGCucumberTests {
 

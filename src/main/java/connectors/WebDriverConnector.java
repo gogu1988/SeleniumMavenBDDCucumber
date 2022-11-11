@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.ashot.AShot;
 import utils.PropertiesFileUtil;
 
@@ -69,7 +70,13 @@ public class WebDriverConnector {
                 break;
 
             default:
-                Assert.fail("Specify browser type as Chrome or Firefox or Edge or IE. Given browser is " + browserName);
+                SoftAssert a = new SoftAssert();
+                a.fail("test");
+                a.assertEquals("test", "test1");
+                a.assertNotEquals("test","test");
+                a.assertAll();
+
+//                Assert.fail("Specify browser type as Chrome or Firefox or Edge or IE. Given browser is " + browserName);
 
         }
 

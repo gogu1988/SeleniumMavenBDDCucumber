@@ -331,4 +331,9 @@ public class WebDriverCommonSteps {
     public void userStoreNumberOfTabsInTheBrowser() {
         numberOfWindows = wdc.numberOfWindows();
     }
+
+    @Then("print {string}")
+    public void print(String arg0) {
+        System.out.println(arg0);
+    }
 }
