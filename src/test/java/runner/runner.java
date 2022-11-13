@@ -17,7 +17,7 @@ import org.testng.annotations.*;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Chrome_Headless"
+        tags = "@Demo_1"
 )
 public class runner extends AbstractTestNGCucumberTests {
 

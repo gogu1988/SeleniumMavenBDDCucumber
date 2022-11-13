@@ -27,7 +27,6 @@ public class MobileDriverCommonSteps {
     MobileDriverConnector mdc;
     PropertiesFileUtil pfu;
 
-    static int numberOfWindows;
     Hooks hooks;
 
     public MobileDriverCommonSteps(MobileDriverConnector mdc, PropertiesFileUtil pfu, Hooks hooks) {
@@ -35,6 +34,7 @@ public class MobileDriverCommonSteps {
         this.pfu = pfu;
         this.hooks = hooks;
     }
+
     @Given("user open {string} device")
     public void userOpenBrowser(String device) {
         mdc.openDevice(device);
@@ -58,8 +58,8 @@ public class MobileDriverCommonSteps {
 
     @Then("user verify {string} is invisible on the {string} in Mobile")
     public void userVerifyIsDisplayedOnThe(String elementName, String page) {
-       if(!mdc.invisibilityOf(elementName, page))
-           Assert.fail(elementName + " is visible on the " + page + " page");
+        if (!mdc.invisibilityOf(elementName, page))
+            Assert.fail(elementName + " is visible on the " + page + " page");
     }
 
     @And("user close device")
@@ -81,7 +81,7 @@ public class MobileDriverCommonSteps {
 
     @Then("user verify that {string} on the {string} and {string} image are same in Mobile")
     public void userCompareTheOnTheWithImageInMobile(String elementName, String pageName, String expectedImage) throws IOException {
-        BufferedImage expected = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\pics\\" + expectedImage+".png"));
+        BufferedImage expected = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\test\\resources\\pics\\" + expectedImage + ".png"));
         BufferedImage actual = mdc.getImageOfWebElement(elementName, pageName);
         ImageDiffer imgDiff = new ImageDiffer();
         ImageDiff diff = imgDiff.makeDiff(expected, actual);
@@ -102,22 +102,13 @@ public class MobileDriverCommonSteps {
 
     @Then("user verify the text of {string} on the {string} is equal to {string} in Mobile")
     public void userVerifyTheTextOfOnTheIsEqualToInMobile(String elementName, String pageName, String expectedText) {
-        if(!mdc.getText(pageName, elementName).trim().equals(expectedText))
+        if (!mdc.getText(pageName, elementName).trim().equals(expectedText))
             Assert.fail("Expected and Actual text are not same. Actual_Text: " + expectedText + " | Expected_Text: " + mdc.getText(pageName, elementName).trim());
     }
 
     @And("user move the mouse to the {string} on the {string} in Mobile")
     public void userMoveTheMouseToTheOnTheInMobile(String elementName, String pageName) {
         mdc.actionsMoveToElement(pageName, elementName);
-    }
-
-    @Then("user verify that a new page opened in same tab with page title as {string} in Mobile")
-    public void userVerifyThatANewPageOpenedInSameTabWithPageTitleAsInMobile(String pageTitle) {
-        if (mdc.getWindowHandles().size() == numberOfWindows) {
-            if (!mdc.getTitle().equalsIgnoreCase(pageTitle))
-                Assert.fail("Expected window title is not equal to actual window title. Expected: " + pageTitle + " | Actual: " + mdc.getTitle());
-        } else
-            Assert.fail("New window opened");
     }
 
     @Then("user verify that a new page opened in new tab with page title as {string} in Mobile")
@@ -153,10 +144,5 @@ public class MobileDriverCommonSteps {
     @And("user switch to window with the title as {string} in Mobile")
     public void userSwitchToWindowWithTheTitleAsInMobile(String windowTitle) {
         mdc.switchToWindowWithTitle(windowTitle);
-    }
-
-    @And("user store number of tabs in the browser in Mobile")
-    public void userStoreNumberOfTabsInTheBrowserInMobile() {
-        numberOfWindows = mdc.numberOfWindows();
     }
 }
