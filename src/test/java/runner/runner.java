@@ -4,10 +4,13 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.*;
 
+import java.util.Arrays;
+
 @CucumberOptions(
         dryRun = false,
         monochrome = true,
         plugin = {"pretty",
+//                "com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:path/report.html",
                 "de.monochromata.cucumber.report.PrettyReports:target", // To generate Cucumber Html Reports
                 "json:target/cucumber.json",
                 "junit:target/cucumber.xml",
@@ -17,11 +20,11 @@ import org.testng.annotations.*;
         },
         glue = {"stepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Demo_1"
+        tags = "@Demo_2, @"
 )
 public class runner extends AbstractTestNGCucumberTests {
 
-    @BeforeSuite
+    @BeforeSuite()
     public void BeforeSuite() {
         System.out.println("Executing BeforeSuite");
     }

@@ -456,26 +456,6 @@ public class WebDriverConnector {
                 .ignoring(Exception.class);
     }
 
-    public List<String> getAvailableEngines() {
-        return driver.manage().ime().getAvailableEngines();
-    }
-
-    public String getActiveEngine() {
-        return driver.manage().ime().getActiveEngine();
-    }
-
-    public boolean engineIsActivated() {
-        return driver.manage().ime().isActivated();
-    }
-
-    public void engineDeactivate() {
-        driver.manage().ime().deactivate();
-    }
-
-    public void activateEngine(String engineName) {
-        driver.manage().ime().activateEngine(engineName);
-    }
-
     // WebElement Start
     public void click(String pageName, String elementName) {
         driverWebElement(pageName, elementName).click();
@@ -601,12 +581,10 @@ public class WebDriverConnector {
 
     public void saveWebElementScreenshot(String elementName, String pageName, String screenshotName, String location) {
         try {
-            File file = new File("/fsnt/qa/automation/pics/" + location);
-//            File file = new File(System.getProperty("user.dir") + "\\src\\test\\resources\\pics\\" + location);
+            File file = new File("/src/test/resources/pics/" + location);
             if (!file.exists())
                 file.mkdir();
-            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File("/fsnt/qa/automation/pics/" + location + "/" + screenshotName + ".png"));
-//            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File(System.getProperty("user.dir") + "\\src\\test\\resources\\pics\\" + location + "\\" + screenshotName + ".png"));
+            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File("/src/test/resources/pics/" + location + "/" + screenshotName + ".png"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             Assert.fail("Not able to take the screen shot of the element " + elementName + "on " + pageName);
