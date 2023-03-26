@@ -1,7 +1,8 @@
-package stepDefinitions;
+package customStepDefinitions;
 
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 
 import java.util.List;
@@ -32,4 +33,5 @@ public class Demo_3 {
     public void userPrintThisMap(Map<String, String> m) {
         System.out.println(m.get("a"));
     }
+
 }

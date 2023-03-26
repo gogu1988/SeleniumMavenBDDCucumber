@@ -1,23 +1,22 @@
-package stepDefinitions;
+package customStepDefinitions;
 
 import connectors.DatabaseConnector;
-import connectors.MobileDriverConnector;
+import connectors.ChromeDevToolsConnector;
 import connectors.WebDriverConnector;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 import io.cucumber.java.Scenario;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
 public class Hooks {
 
     WebDriverConnector wdc;
     DatabaseConnector dbc;
-    MobileDriverConnector mdc;
+    ChromeDevToolsConnector mdc;
     public Scenario currentScenario;
 
-    public Hooks(WebDriverConnector wdc, DatabaseConnector dbc, MobileDriverConnector mdc) {
+    public Hooks(WebDriverConnector wdc, DatabaseConnector dbc, ChromeDevToolsConnector mdc) {
         this.wdc = wdc;
         this.dbc = dbc;
         this.mdc = mdc;
@@ -35,11 +34,25 @@ public class Hooks {
         currentScenario.attach(wdc.takeScreenshot(), "img/png", screenShotName);
     }
 
+    @Then("user take screen shot as {string} in Mobile")
+    public void userTakeScreenShotInMobile(String screenShotName) {
+        currentScenario.attach(mdc.takeScreenshot(), "img/png", screenShotName);
+    }
+
     @Then("user write the log as {string}")
     public void userWriteTheLogAs(String log) {
         currentScenario.log(log);
     }
 
+    @Then("Scenario Test")
+    public void scenarioTest() {
+        System.out.println("getStatus " + currentScenario.getStatus());
+        System.out.println("getId " + currentScenario.getId());
+        System.out.println("getName " + currentScenario.getName());
+        System.out.println("getSourceTagNames " + currentScenario.getSourceTagNames());
+        System.out.println("getLine " + currentScenario.getLine());
+        System.out.println("getUri " + currentScenario.getUri());
+    }
 
     @After
     public void tearDown() {
@@ -54,9 +67,6 @@ public class Hooks {
                 mdc.quit();
             }
         }
-
-
     }
-
 
 }

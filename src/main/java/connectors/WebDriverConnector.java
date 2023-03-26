@@ -1,15 +1,20 @@
 package connectors;
 
+import com.mysql.cj.x.protobuf.MysqlxCursor;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v85.emulation.Emulation;
+import org.openqa.selenium.devtools.v85.fetch.Fetch;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -17,11 +22,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import utils.PropertiesFileUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
@@ -30,14 +37,17 @@ import java.util.concurrent.TimeUnit;
 public class WebDriverConnector {
 
     WebDriver driver;
-    ChromeDriver mobileDriver;
     PropertiesFileUtil pfc;
+
+    public static final String USERNAME = "govardhanreddy_drh4at";
+    public static final String AUTOMATE_KEY = "u19tRqpNusEy8WBgm7cK";
+    public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
     public WebDriverConnector(PropertiesFileUtil pfc) {
         this.pfc = pfc;
     }
 
-    public void openBrowser(String browserName) {
+    public void openBrowser(String browserName) throws MalformedURLException {
 
         switch (browserName.toLowerCase()) {
 
@@ -69,14 +79,22 @@ public class WebDriverConnector {
                 driver = new ChromeDriver(options);
                 break;
 
-            default:
-                SoftAssert a = new SoftAssert();
-                a.fail("test");
-                a.assertEquals("test", "test1");
-                a.assertNotEquals("test","test");
-                a.assertAll();
+            case "browser_stack":
+                MutableCapabilities capabilities = new MutableCapabilities();
+                capabilities.setCapability("browserName", "Chrome");
+                capabilities.setCapability("browserVersion", "latest");
+                HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
+                browserstackOptions.put("os", "Windows");
+                browserstackOptions.put("osVersion", "11");
+                browserstackOptions.put("projectName", "Sample sandbox project");
+                browserstackOptions.put("buildName", "Build #1");
+                browserstackOptions.put("sessionName", "My First Test");
+                capabilities.setCapability("bstack:options", browserstackOptions);
+                driver = new RemoteWebDriver(new URL(URL), capabilities);
+                break;
 
-//                Assert.fail("Specify browser type as Chrome or Firefox or Edge or IE. Given browser is " + browserName);
+            default:
+                Assert.fail("Specify browser type as Chrome or Firefox or Edge or IE. Given browser is " + browserName);
 
         }
 
@@ -87,12 +105,12 @@ public class WebDriverConnector {
     }
 
     public String locatorType(String pageName, String elementName) {
-        String locatorType = webElementReader(pageName, elementName).split(":")[0];
+        String locatorType = webElementReader(pageName, elementName).split(":", 2)[0];
         return locatorType;
     }
 
     public String webElement(String pageName, String elementName) {
-        String webElement = webElementReader(pageName, elementName).split(":")[1];
+        String webElement = webElementReader(pageName, elementName).split(":", 2)[1];
         return webElement;
     }
 
@@ -581,10 +599,10 @@ public class WebDriverConnector {
 
     public void saveWebElementScreenshot(String elementName, String pageName, String screenshotName, String location) {
         try {
-            File file = new File("/src/test/resources/pics/" + location);
+            File file = new File(System.getProperty("user.dir") + "/src/test/resources/pics/" + location);
             if (!file.exists())
                 file.mkdir();
-            ImageIO.write((new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File("/src/test/resources/pics/" + location + "/" + screenshotName + ".png"));
+            ImageIO.write((new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage(), "png", new File(System.getProperty("user.dir") + "/src/test/resources/pics/" + location + "/" + screenshotName + ".png"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             Assert.fail("Not able to take the screen shot of the element " + elementName + "on " + pageName);
@@ -592,7 +610,7 @@ public class WebDriverConnector {
     }
 
     public BufferedImage getImageOfWebElement(String elementName, String pageName) {
-        return (new AShot().takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage();
+        return (new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver(), driverWebElement(pageName, elementName))).getImage();
     }
 
     public void elementToBeClickable(String elementName, String pageName, int sec) {
@@ -608,5 +626,7 @@ public class WebDriverConnector {
     public int numberOfWindows() {
         return driver.getWindowHandles().size();
     }
+
+
 
 }

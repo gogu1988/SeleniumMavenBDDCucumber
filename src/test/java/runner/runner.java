@@ -1,26 +1,28 @@
 package runner;
 
+import io.cucumber.core.gherkin.Feature;
+import io.cucumber.plugin.event.Node;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import io.cucumber.testng.FeatureWrapper;
 import org.testng.annotations.*;
 
-import java.util.Arrays;
+import java.awt.*;
 
 @CucumberOptions(
         dryRun = false,
         monochrome = true,
         plugin = {"pretty",
-//                "com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:path/report.html",
-                "de.monochromata.cucumber.report.PrettyReports:target", // To generate Cucumber Html Reports
+                "de.monochromata.cucumber.report.PrettyReports:target",
                 "json:target/cucumber.json",
                 "junit:target/cucumber.xml",
                 "rerun:target/rerun.txt",
                 "timeline:target/timelineReports",
                 "html:target/htmlReports.html"
         },
-        glue = {"stepDefinitions"},
+        glue = {"customStepDefinitions", "commonStepDefinitions"},
         features = {"src/test/resources/features"},
-        tags = "@Demo_2, @"
+        tags = "@Network"
 )
 public class runner extends AbstractTestNGCucumberTests {
 
@@ -69,5 +71,6 @@ public class runner extends AbstractTestNGCucumberTests {
     public void AfterSuite() {
         System.out.println("Executing AfterSuite");
     }
+
 
 }

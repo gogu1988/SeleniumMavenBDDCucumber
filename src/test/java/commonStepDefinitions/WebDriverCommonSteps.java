@@ -1,4 +1,4 @@
-package stepDefinitions;
+package commonStepDefinitions;
 
 import connectors.WebDriverConnector;
 import io.cucumber.java.en.And;
@@ -10,15 +10,15 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.testng.Assert;
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import customStepDefinitions.Hooks;
 import utils.PropertiesFileUtil;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class WebDriverCommonSteps {
@@ -43,7 +43,7 @@ public class WebDriverCommonSteps {
     }
 
     @Given("user open {string} browser")
-    public void userOpenBrowser(String browser) {
+    public void userOpenBrowser(String browser) throws MalformedURLException {
         wdc.openBrowser(browser);
         wdc.implicitlyWait();
         wdc.windowMaximize();
@@ -213,6 +213,11 @@ public class WebDriverCommonSteps {
         Thread.sleep(time * 1000);
     }
 
+    @And("user wait for {string} sec")
+    public void userWaitForSec(String time) throws InterruptedException {
+        hooks.currentScenario.log("Hello " + time);
+    }
+
     @And("user close browser")
     public void useCloseBrowser() {
         wdc.quit();
@@ -271,8 +276,7 @@ public class WebDriverCommonSteps {
 
     @Then("user verify that {string} on the {string} and {string} image are same")
     public void userVerifyThatOnTheAndImageAreSame(String elementName, String pageName, String expectedImage) throws IOException {
-        BufferedImage expected = ImageIO.read(new File( "/fsnt/qa/automation/pics/" + expectedImage + ".png"));
-//        BufferedImage expected = ImageIO.read(new File(System.getProperty("user.dir") + "/src/test/resources/pics/" + expectedImage + ".png"));
+        BufferedImage expected = ImageIO.read(new File( System.getProperty("user.dir")+"/src/test/resources/pics/" + expectedImage + ".png"));
         BufferedImage actual = wdc.getImageOfWebElement(elementName, pageName);
         ImageDiffer imgDiff = new ImageDiffer();
         ImageDiff diff = imgDiff.makeDiff(expected, actual);
@@ -332,8 +336,4 @@ public class WebDriverCommonSteps {
         numberOfWindows = wdc.numberOfWindows();
     }
 
-    @Then("print {string}")
-    public void print(String arg0) {
-        System.out.println(arg0);
-    }
 }

@@ -3,8 +3,10 @@ package connectors;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v85.emulation.Emulation;
+import org.openqa.selenium.devtools.v85.fetch.Fetch;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -12,25 +14,24 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import utils.PropertiesFileUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class MobileDriverConnector {
+public class ChromeDevToolsConnector {
 
-    ChromeDriver mobileDriver;
+    ChromeDriver chromeDriver;
     PropertiesFileUtil pfc;
     DevTools devTools;
 
-    public MobileDriverConnector(PropertiesFileUtil pfc) {
+    public ChromeDevToolsConnector(PropertiesFileUtil pfc) {
         this.pfc = pfc;
     }
 
@@ -41,8 +42,8 @@ public class MobileDriverConnector {
         switch (device.toLowerCase()) {
 
             case "ipad air":
-                mobileDriver = new ChromeDriver();
-                devTools = mobileDriver.getDevTools();
+                chromeDriver = new ChromeDriver();
+                devTools = chromeDriver.getDevTools();
                 devTools.createSession();
                 devTools.send(Emulation.setDeviceMetricsOverride(
                         820,
@@ -61,8 +62,8 @@ public class MobileDriverConnector {
                 break;
 
             case "ipad mini":
-                mobileDriver = new ChromeDriver();
-                devTools = mobileDriver.getDevTools();
+                chromeDriver = new ChromeDriver();
+                devTools = chromeDriver.getDevTools();
                 devTools.createSession();
                 devTools.send(Emulation.setDeviceMetricsOverride(
                         768,
@@ -81,8 +82,8 @@ public class MobileDriverConnector {
                 break;
 
             case "iphone 12 pro":
-                mobileDriver = new ChromeDriver();
-                devTools = mobileDriver.getDevTools();
+                chromeDriver = new ChromeDriver();
+                devTools = chromeDriver.getDevTools();
                 devTools.createSession();
                 devTools.send(Emulation.setDeviceMetricsOverride(
                         390,
@@ -101,8 +102,8 @@ public class MobileDriverConnector {
                 break;
 
             case "pixel 5":
-                mobileDriver = new ChromeDriver();
-                devTools = mobileDriver.getDevTools();
+                chromeDriver = new ChromeDriver();
+                devTools = chromeDriver.getDevTools();
                 devTools.createSession();
                 devTools.send(Emulation.setDeviceMetricsOverride(
                         393,
@@ -121,8 +122,8 @@ public class MobileDriverConnector {
                 break;
 
             case "samsung galaxy s8+":
-                mobileDriver = new ChromeDriver();
-                devTools = mobileDriver.getDevTools();
+                chromeDriver = new ChromeDriver();
+                devTools = chromeDriver.getDevTools();
                 devTools.createSession();
                 devTools.send(Emulation.setDeviceMetricsOverride(
                         360,
@@ -169,31 +170,31 @@ public class MobileDriverConnector {
             switch (locatorType(pageName, elementName).toLowerCase()) {
 
                 case "cssselector":
-                    mobileDriverWebElement = mobileDriver.findElement(By.cssSelector(webElement(pageName, elementName)));
+                    mobileDriverWebElement = chromeDriver.findElement(By.cssSelector(webElement(pageName, elementName)));
                     break;
 
                 case "xpath":
-                    mobileDriverWebElement = mobileDriver.findElement(By.xpath(webElement(pageName, elementName)));
+                    mobileDriverWebElement = chromeDriver.findElement(By.xpath(webElement(pageName, elementName)));
                     break;
 
                 case "linktext":
-                    mobileDriverWebElement = mobileDriver.findElement(By.linkText(webElement(pageName, elementName)));
+                    mobileDriverWebElement = chromeDriver.findElement(By.linkText(webElement(pageName, elementName)));
                     break;
 
                 case "partiallinktext":
-                    mobileDriverWebElement = mobileDriver.findElement(By.partialLinkText(webElement(pageName, elementName)));
+                    mobileDriverWebElement = chromeDriver.findElement(By.partialLinkText(webElement(pageName, elementName)));
                     break;
 
                 case "name":
-                    mobileDriverWebElement = mobileDriver.findElement(By.name(webElement(pageName, elementName)));
+                    mobileDriverWebElement = chromeDriver.findElement(By.name(webElement(pageName, elementName)));
                     break;
 
                 case "classname":
-                    mobileDriverWebElement = mobileDriver.findElement(By.className(webElement(pageName, elementName)));
+                    mobileDriverWebElement = chromeDriver.findElement(By.className(webElement(pageName, elementName)));
                     break;
 
                 case "id":
-                    mobileDriverWebElement = mobileDriver.findElement(By.id(webElement(pageName, elementName)));
+                    mobileDriverWebElement = chromeDriver.findElement(By.id(webElement(pageName, elementName)));
                     break;
 
                 default:
@@ -216,31 +217,31 @@ public class MobileDriverConnector {
         switch (locatorType(pageName, elementName).toLowerCase()) {
 
             case "cssSelector":
-                mobileDriverWebElements = mobileDriver.findElements(By.cssSelector(webElement(pageName, elementName)));
+                mobileDriverWebElements = chromeDriver.findElements(By.cssSelector(webElement(pageName, elementName)));
                 break;
 
             case "xpath":
-                mobileDriverWebElements = mobileDriver.findElements(By.xpath(webElement(pageName, elementName)));
+                mobileDriverWebElements = chromeDriver.findElements(By.xpath(webElement(pageName, elementName)));
                 break;
 
             case "linkText":
-                mobileDriverWebElements = mobileDriver.findElements(By.linkText(webElement(pageName, elementName)));
+                mobileDriverWebElements = chromeDriver.findElements(By.linkText(webElement(pageName, elementName)));
                 break;
 
             case "partialLinkText":
-                mobileDriverWebElements = mobileDriver.findElements(By.partialLinkText(webElement(pageName, elementName)));
+                mobileDriverWebElements = chromeDriver.findElements(By.partialLinkText(webElement(pageName, elementName)));
                 break;
 
             case "name":
-                mobileDriverWebElements = mobileDriver.findElements(By.name(webElement(pageName, elementName)));
+                mobileDriverWebElements = chromeDriver.findElements(By.name(webElement(pageName, elementName)));
                 break;
 
             case "className":
-                mobileDriverWebElements = mobileDriver.findElements(By.className(webElement(pageName, elementName)));
+                mobileDriverWebElements = chromeDriver.findElements(By.className(webElement(pageName, elementName)));
                 break;
 
             case "id":
-                mobileDriverWebElements = mobileDriver.findElements(By.id(webElement(pageName, elementName)));
+                mobileDriverWebElements = chromeDriver.findElements(By.id(webElement(pageName, elementName)));
                 break;
 
             default:
@@ -253,23 +254,23 @@ public class MobileDriverConnector {
 
 
     public void windowMaximize() {
-        mobileDriver.manage().window().maximize();
+        chromeDriver.manage().window().maximize();
     }
 
     public ChromeDriver mobileDriver() {
-        return mobileDriver;
+        return chromeDriver;
     }
 
     public void get(String url) {
-        mobileDriver.get(url);
+        chromeDriver.get(url);
     }
 
     public String getCurrentUrl() {
-        return mobileDriver.getCurrentUrl();
+        return chromeDriver.getCurrentUrl();
     }
 
     public String getTitle() {
-        return mobileDriver.getTitle();
+        return chromeDriver.getTitle();
     }
 
     public List<WebElement> findElements(String locatorType, String finalElement) {
@@ -279,31 +280,31 @@ public class MobileDriverConnector {
         switch (locatorType.toLowerCase()) {
 
             case "cssSelector":
-                findElements = mobileDriver.findElements(By.cssSelector(finalElement));
+                findElements = chromeDriver.findElements(By.cssSelector(finalElement));
                 break;
 
             case "xpath":
-                findElements = mobileDriver.findElements(By.xpath(finalElement));
+                findElements = chromeDriver.findElements(By.xpath(finalElement));
                 break;
 
             case "linkText":
-                findElements = mobileDriver.findElements(By.linkText(finalElement));
+                findElements = chromeDriver.findElements(By.linkText(finalElement));
                 break;
 
             case "partialLinkText":
-                findElements = mobileDriver.findElements(By.partialLinkText(finalElement));
+                findElements = chromeDriver.findElements(By.partialLinkText(finalElement));
                 break;
 
             case "name":
-                findElements = mobileDriver.findElements(By.name(finalElement));
+                findElements = chromeDriver.findElements(By.name(finalElement));
                 break;
 
             case "className":
-                findElements = mobileDriver.findElements(By.className(finalElement));
+                findElements = chromeDriver.findElements(By.className(finalElement));
                 break;
 
             case "id":
-                findElements = mobileDriver.findElements(By.id(finalElement));
+                findElements = chromeDriver.findElements(By.id(finalElement));
                 break;
 
             default:
@@ -321,31 +322,31 @@ public class MobileDriverConnector {
         switch (locatorType.toLowerCase()) {
 
             case "cssselector":
-                findElement = mobileDriver.findElement(By.cssSelector(finalElement));
+                findElement = chromeDriver.findElement(By.cssSelector(finalElement));
                 break;
 
             case "xpath":
-                findElement = mobileDriver.findElement(By.xpath(finalElement));
+                findElement = chromeDriver.findElement(By.xpath(finalElement));
                 break;
 
             case "linktext":
-                findElement = mobileDriver.findElement(By.linkText(finalElement));
+                findElement = chromeDriver.findElement(By.linkText(finalElement));
                 break;
 
             case "partiallinktext":
-                findElement = mobileDriver.findElement(By.partialLinkText(finalElement));
+                findElement = chromeDriver.findElement(By.partialLinkText(finalElement));
                 break;
 
             case "name":
-                findElement = mobileDriver.findElement(By.name(finalElement));
+                findElement = chromeDriver.findElement(By.name(finalElement));
                 break;
 
             case "classname":
-                findElement = mobileDriver.findElement(By.className(finalElement));
+                findElement = chromeDriver.findElement(By.className(finalElement));
                 break;
 
             case "id":
-                findElement = mobileDriver.findElement(By.id(finalElement));
+                findElement = chromeDriver.findElement(By.id(finalElement));
                 break;
 
             default:
@@ -357,123 +358,123 @@ public class MobileDriverConnector {
     }
 
     public String getPageSource() {
-        return mobileDriver.getPageSource();
+        return chromeDriver.getPageSource();
     }
 
     public void close() {
-        mobileDriver.close();
+        chromeDriver.close();
     }
 
     public void quit() {
-        mobileDriver.quit();
+        chromeDriver.quit();
     }
 
     public Set<String> getWindowHandles() {
-        return mobileDriver.getWindowHandles();
+        return chromeDriver.getWindowHandles();
     }
 
     public String getWindowHandle() {
-        return mobileDriver.getWindowHandle();
+        return chromeDriver.getWindowHandle();
     }
 
     public void switchToFrame(int frameId) {
-        mobileDriver.switchTo().frame(frameId);
+        chromeDriver.switchTo().frame(frameId);
     }
 
     public void switchToFrame(String frameName) {
-        mobileDriver.switchTo().frame(frameName);
+        chromeDriver.switchTo().frame(frameName);
     }
 
     public void switchToFrame(String elementName, String pageName) {
-        mobileDriver.switchTo().frame(mobileDriverWebElement(pageName, elementName));
+        chromeDriver.switchTo().frame(mobileDriverWebElement(pageName, elementName));
     }
 
     public void switchToParentFrame(String elementName, String pageName) {
-        mobileDriver.switchTo().parentFrame();
+        chromeDriver.switchTo().parentFrame();
     }
 
     public void switchToWindow(String windowName) {
-        mobileDriver.switchTo().window(windowName);
+        chromeDriver.switchTo().window(windowName);
     }
 
     public void switchToDefaultContent() {
-        mobileDriver.switchTo().defaultContent();
+        chromeDriver.switchTo().defaultContent();
     }
 
     public void switchToActiveElement() {
-        mobileDriver.switchTo().activeElement();
+        chromeDriver.switchTo().activeElement();
     }
 
     public Alert switchToAlert() {
-        return mobileDriver.switchTo().alert();
+        return chromeDriver.switchTo().alert();
     }
 
     public String getTextOnAlert() {
-        return mobileDriver.switchTo().alert().getText();
+        return chromeDriver.switchTo().alert().getText();
     }
 
     public void navigateBack() {
-        mobileDriver.navigate().back();
+        chromeDriver.navigate().back();
     }
 
     public void navigateForward() {
-        mobileDriver.navigate().forward();
+        chromeDriver.navigate().forward();
     }
 
     public void navigateTo(String url) {
-        mobileDriver.navigate().to(url);
+        chromeDriver.navigate().to(url);
     }
 
     public void navigateTo(URL url) {
-        mobileDriver.navigate().to(url);
+        chromeDriver.navigate().to(url);
     }
 
     public void refresh() {
-        mobileDriver.navigate().refresh();
+        chromeDriver.navigate().refresh();
     }
 
     public void addCookie(Cookie cookie) {
-        mobileDriver.manage().addCookie(cookie);
+        chromeDriver.manage().addCookie(cookie);
     }
 
     public void deleteCookieNamed(String cookieName) {
-        mobileDriver.manage().deleteCookieNamed(cookieName);
+        chromeDriver.manage().deleteCookieNamed(cookieName);
     }
 
     public void deleteCookie(Cookie cookie) {
-        mobileDriver.manage().deleteCookie(cookie);
+        chromeDriver.manage().deleteCookie(cookie);
     }
 
     public void deleteAllCookies() {
-        mobileDriver.manage().deleteAllCookies();
+        chromeDriver.manage().deleteAllCookies();
     }
 
     public Set<Cookie> getCookies() {
-        return mobileDriver.manage().getCookies();
+        return chromeDriver.manage().getCookies();
     }
 
     public Cookie getCookieNamed(String cookieName) {
-        return mobileDriver.manage().getCookieNamed(cookieName);
+        return chromeDriver.manage().getCookieNamed(cookieName);
     }
 
     public void implicitlyWait() {
-        mobileDriver.manage().timeouts().implicitlyWait(Integer.parseInt(pfc.frameworkConfig().getProperty("implicitlyWait")), TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().implicitlyWait(Integer.parseInt(pfc.frameworkConfig().getProperty("implicitlyWait")), TimeUnit.SECONDS);
     }
 
     public void setScriptTimeout() {
-        mobileDriver.manage().timeouts().setScriptTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("setScriptTimeout")), TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().setScriptTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("setScriptTimeout")), TimeUnit.SECONDS);
     }
 
     public void pageLoadTimeout() {
-        mobileDriver.manage().timeouts().pageLoadTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().pageLoadTimeout(Integer.parseInt(pfc.frameworkConfig().getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
     }
 
     public WebDriverWait explicitWait(Duration sec) {
-        return new WebDriverWait(mobileDriver, sec);
+        return new WebDriverWait(chromeDriver, sec);
     }
 
     public Wait fluentWait(Duration timeout, Duration pollingTime) {
-        return new FluentWait(mobileDriver)
+        return new FluentWait(chromeDriver)
                 .withTimeout(timeout)
                 .pollingEvery(pollingTime)
                 .ignoring(Exception.class);
@@ -539,7 +540,7 @@ public class MobileDriverConnector {
 
     // Actions
     public Actions actions() {
-        return new Actions(mobileDriver);
+        return new Actions(chromeDriver);
     }
 
     public void actionsClick() {
@@ -599,11 +600,11 @@ public class MobileDriverConnector {
     }
 
     public byte[] takeScreenshot() {
-        return ((TakesScreenshot) mobileDriver).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) chromeDriver).getScreenshotAs(OutputType.BYTES);
     }
 
     public boolean invisibilityOf(String elementName, String page) {
-        WebDriverWait wait = new WebDriverWait(mobileDriver, Duration.ofSeconds(Integer.parseInt(pfc.frameworkConfig().getProperty("invisibilityOfElement"))));
+        WebDriverWait wait = new WebDriverWait(chromeDriver, Duration.ofSeconds(Integer.parseInt(pfc.frameworkConfig().getProperty("invisibilityOfElement"))));
         return wait.until(ExpectedConditions.invisibilityOf(mobileDriverWebElement(page, elementName)));
     }
 
@@ -612,7 +613,7 @@ public class MobileDriverConnector {
             File file = new File(System.getProperty("user.dir") + "/src/test/resources/pics/" + location);
             if (!file.exists())
                 file.mkdir();
-            ImageIO.write((new AShot().takeScreenshot(mobileDriver(), mobileDriverWebElement(pageName, elementName))).getImage(), "png", new File(System.getProperty("user.dir") + "/src/test/resources/pics/" + location + "/" + screenshotName + ".png"));
+            ImageIO.write((new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(mobileDriver(), mobileDriverWebElement(pageName, elementName))).getImage(), "png", new File(System.getProperty("user.dir") + "/src/test/resources/pics/" + location + "/" + screenshotName + ".png"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             Assert.fail("Not able to take the screen shot of the element " + elementName + "on " + pageName);
@@ -620,11 +621,11 @@ public class MobileDriverConnector {
     }
 
     public BufferedImage getImageOfWebElement(String elementName, String pageName) {
-        return (new AShot().takeScreenshot(mobileDriver(), mobileDriverWebElement(pageName, elementName))).getImage();
+        return (new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(mobileDriver(), mobileDriverWebElement(pageName, elementName))).getImage();
     }
 
     public void elementToBeClickable(String elementName, String pageName, int sec) {
-        WebDriverWait wait = new WebDriverWait(mobileDriver, Duration.ofSeconds(sec));
+        WebDriverWait wait = new WebDriverWait(chromeDriver, Duration.ofSeconds(sec));
         wait.until(ExpectedConditions.elementToBeClickable(mobileDriverWebElement(pageName, elementName)));
     }
 
@@ -672,7 +673,37 @@ public class MobileDriverConnector {
     }
 
     public int numberOfWindows(){
-        return mobileDriver.getWindowHandles().size();
+        return chromeDriver.getWindowHandles().size();
+    }
+
+    public void devTools() {
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+
+        ChromeOptions options=new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        WebDriverManager.chromedriver().setup();
+
+        ChromeDriver driver = new ChromeDriver(options);
+        DevTools devTools= driver.getDevTools();
+        devTools.createSession();
+        devTools.send(Fetch.enable(Optional.empty(), Optional.empty()));
+        devTools.addListener(Fetch.requestPaused(), request -> {
+            System.out.println("Gogu");
+            if(request.getRequest().getUrl().contains("=shetty")) {
+                String newURL = request.getRequest().getUrl().replace("=shetty", "=BadGuy");
+                devTools.send(Fetch.continueRequest(request.getRequestId(), Optional.of(newURL), Optional.of(request.getRequest().getMethod()), request.getRequest().getPostData(), request.getResponseHeaders()));
+            }
+            else{
+                devTools.send(Fetch.continueRequest(request.getRequestId(), Optional.of(request.getRequest().getUrl()), Optional.of(request.getRequest().getMethod()), request.getRequest().getPostData(), request.getResponseHeaders()));
+            }
+        });
+        driver.get("https://rahulshettyacademy.com/angularAppdemo/");
+        driver.findElement(By.xpath("/html/body/app-root/app-landingpage/div/button")).click();
+        try {
+            Thread.sleep(3);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package stepDefinitions;
+package customStepDefinitions;
 
 import io.cucumber.cucumberexpressions.Transformer;
 
